@@ -1,4 +1,4 @@
-Here you find some code to visualize with Tidyverse GAMS simulations output. 
+This repository contains R code for creating charts using GAMS simulations data.
 
 General info:
 1. Read in gdx data using the **gdxrrw** package. This requires that GAMS is already installed.
