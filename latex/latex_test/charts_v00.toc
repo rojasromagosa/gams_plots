@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Domestic debt stock}{3}{}%
+\contentsline {section}{\numberline {2}Foreign debt stock}{5}{}%
+\contentsline {section}{\numberline {3}Total debt stock}{7}{}%
+\contentsline {section}{\numberline {4}Real GDP per capita}{9}{}%
+\contentsline {section}{\numberline {5}Real Exports}{11}{}%
+\contentsline {section}{\numberline {6}Real Imports}{13}{}%
+\contentsline {section}{\numberline {7}Total emissions}{15}{}%
+\contentsline {section}{\numberline {8}Average unit cost}{18}{}%
+\contentsline {section}{\numberline {9}Gross sectoral output}{24}{}%
+\contentsline {section}{\numberline {10}Total household income}{30}{}%

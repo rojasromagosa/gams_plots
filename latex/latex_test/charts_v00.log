@@ -1,0 +1,528 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2021.8.7)  7 DEC 2021 14:18
+entering extended mode
+**./charts_v00.tex
+(charts_v00.tex
+LaTeX2e <2020-10-01> patch level 1
+L3 programming layer <2020-10-05> xparse <2020-03-03>
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/base\article.cls"
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/base\size12.clo"
+File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count175
+\c@section=\count176
+\c@subsection=\count177
+\c@subsubsection=\count178
+\c@paragraph=\count179
+\c@subparagraph=\count180
+\c@figure=\count181
+\c@table=\count182
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/base\inputenc.sty"
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/graphics-def\pdftex.def"
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+)
+("Z:\99_other_programs\MiKTeX 2.9\tex/latex/float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count183
+\float@exts=\toks18
+\float@box=\box47
+\@float@everytoks=\toks19
+\@floatcapt=\box48
+)
+(C:\Users\desil\AppData\Roaming\MiKTeX\2.9\tex/latex/l3backend\l3backend-pdftex
+.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count184
+\l__pdf_internal_box=\box49
+) (charts_v00.aux)
+\openout1 = `charts_v00.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+
+(C:\Users\desil\AppData\Roaming\MiKTeX\2.9\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count185
+\scratchdimen=\dimen141
+\scratchbox=\box50
+\nofMPsegments=\count186
+\nofMParguments=\count187
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count188
+\MPscratchDim=\dimen142
+\MPnumerator=\count189
+\makeMPintoPDFobject=\count190
+\everyMPtoPDFconversion=\toks21
+)
+(C:\Users\desil\AppData\Roaming\MiKTeX\2.9\tex/latex/epstopdf-pkg\epstopdf-base
+.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+
+
+LaTeX Warning: No \author given.
+
+(charts_v00.lof
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1.
+ [1
+
+{C:/Users/desil/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}])
+\tf@lof=\write3
+\openout3 = `charts_v00.lof'.
+
+ (charts_v00.toc)
+\tf@toc=\write4
+\openout4 = `charts_v00.toc'.
+
+ [2]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_debtStk
+D_bau.pdf, id=11, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_de
+btStkD_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_deb
+tStkD_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkD/USA_debtStkD_bau.pdf  used on input line 22.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_debtStk
+D_changes_bar.pdf, id=12, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_de
+btStkD_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_deb
+tStkD_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkD/USA_debtStkD_changes_bar.pdf  used on input line 30.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_debtStk
+D_changes_line.pdf, id=13, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_de
+btStkD_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_deb
+tStkD_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkD/USA_debtStkD_changes_line.pdf  used on input line 38.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [3 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkD/USA_deb
+tStkD_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtS
+tkD/USA_debtStkD_changes_bar.pdf>] [4 <Z:/Dropbox/Valentino/Projects/WB_plots/c
+harts/Manage/2dim/debtStkD/USA_debtStkD_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_debtStk
+F_bau.pdf, id=38, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_de
+btStkF_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_deb
+tStkF_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkF/USA_debtStkF_bau.pdf  used on input line 51.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_debtStk
+F_changes_bar.pdf, id=39, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_de
+btStkF_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_deb
+tStkF_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkF/USA_debtStkF_changes_bar.pdf  used on input line 59.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_debtStk
+F_changes_line.pdf, id=40, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_de
+btStkF_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_deb
+tStkF_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkF/USA_debtStkF_changes_line.pdf  used on input line 67.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [5 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkF/USA_deb
+tStkF_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtS
+tkF/USA_debtStkF_changes_bar.pdf>] [6 <Z:/Dropbox/Valentino/Projects/WB_plots/c
+harts/Manage/2dim/debtStkF/USA_debtStkF_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_debtStk
+T_bau.pdf, id=65, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_de
+btStkT_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_deb
+tStkT_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkT/USA_debtStkT_bau.pdf  used on input line 80.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_debtStk
+T_changes_bar.pdf, id=66, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_de
+btStkT_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_deb
+tStkT_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkT/USA_debtStkT_changes_bar.pdf  used on input line 88.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_debtStk
+T_changes_line.pdf, id=67, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_de
+btStkT_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_deb
+tStkT_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/debtStkT/USA_debtStkT_changes_line.pdf  used on input line 96.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [7 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtStkT/USA_deb
+tStkT_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/debtS
+tkT/USA_debtStkT_changes_bar.pdf>] [8 <Z:/Dropbox/Valentino/Projects/WB_plots/c
+harts/Manage/2dim/debtStkT/USA_debtStkT_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdppc_ba
+u.pdf, id=93, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdp
+pc_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdpp
+c_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rgdppc/USA_rgdppc_bau.pdf  used on input line 109.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdppc_ch
+anges_bar.pdf, id=94, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdp
+pc_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdpp
+c_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rgdppc/USA_rgdppc_changes_bar.pdf  used on input line 117.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdppc_ch
+anges_line.pdf, id=95, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdp
+pc_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdpp
+c_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rgdppc/USA_rgdppc_changes_line.pdf  used on input line 125.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [9 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/USA_rgdpp
+c_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rgdppc/US
+A_rgdppc_changes_bar.pdf>] [10 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/M
+anage/2dim/rgdppc/USA_rgdppc_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTotExp_
+bau.pdf, id=120, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTo
+tExp_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTot
+Exp_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rTotExp/USA_rTotExp_bau.pdf  used on input line 138.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTotExp_
+changes_bar.pdf, id=121, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTo
+tExp_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTot
+Exp_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rTotExp/USA_rTotExp_changes_bar.pdf  used on input line 146.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTotExp_
+changes_line.pdf, id=122, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTo
+tExp_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTot
+Exp_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rTotExp/USA_rTotExp_changes_line.pdf  used on input line 154.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [11 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotExp/USA_rTo
+tExp_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rTotEx
+p/USA_rTotExp_changes_bar.pdf>] [12 <Z:/Dropbox/Valentino/Projects/WB_plots/cha
+rts/Manage/2dim/rTotExp/USA_rTotExp_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtotimp_
+bau.pdf, id=147, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rto
+timp_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtot
+imp_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rtotimp/USA_rtotimp_bau.pdf  used on input line 167.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtotimp_
+changes_bar.pdf, id=148, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rto
+timp_changes_bar.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtot
+imp_changes_bar.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rtotimp/USA_rtotimp_changes_bar.pdf  used on input line 175.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtotimp_
+changes_line.pdf, id=149, 433.62pt x 289.08pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rto
+timp_changes_line.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rtot
+imp_changes_line.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2
+dim/rtotimp/USA_rtotimp_changes_line.pdf  used on input line 183.
+(pdftex.def)             Requested size: 292.5pt x 195.0103pt.
+ [13 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotimp/USA_rto
+timp_bau.pdf> <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/2dim/rtotim
+p/USA_rtotimp_changes_bar.pdf>] [14 <Z:/Dropbox/Valentino/Projects/WB_plots/cha
+rts/Manage/2dim/rtotimp/USA_rtotimp_changes_line.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTot_Al
+l_neg.pdf, id=175, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiT
+ot_All_neg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTo
+t_All_neg.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/emiTot/USA_emiTot_All_neg.pdf  used on input line 196.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTot_Al
+l_pos.pdf, id=176, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiT
+ot_All_pos.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTo
+t_All_pos.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/emiTot/USA_emiTot_All_pos.pdf  used on input line 204.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTot_ba
+u.pdf, id=177, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiT
+ot_bau.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTo
+t_bau.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/emiTot/USA_emiTot_bau.pdf  used on input line 212.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [15 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiT
+ot_All_neg.pdf>] [16 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim
+/emiTot/USA_emiTot_All_pos.pdf>]
+[17 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/emiTot/USA_emiTo
+t_bau.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_All_ne
+g.pdf, id=205, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_A
+ll_neg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_Al
+l_neg.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_agg_All_neg.pdf  used on input line 225.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_All_po
+s.pdf, id=206, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_A
+ll_pos.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_Al
+l_pos.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_agg_All_pos.pdf  used on input line 233.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_bau.pd
+f, id=207, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_b
+au.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_ba
+u.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_agg_bau.pdf  used on input line 241.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [18 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_A
+ll_neg.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_neg.pd
+f, id=217, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_n
+eg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_ne
+g.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_All_neg.pdf  used on input line 249.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [19 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_A
+ll_pos.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_pos.pd
+f, id=228, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_p
+os.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_po
+s.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_All_pos.pdf  used on input line 257.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [20 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_agg_b
+au.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_bau.pdf, i
+d=238, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_bau.p
+df Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_bau.pd
+f>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/px/USA_px_bau.pdf  used on input line 265.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [21 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_px_All_n
+eg.pdf>] [22 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/px/USA_
+px_All_pos.pdf>] [23 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim
+/px/USA_px_bau.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_All_ne
+g.pdf, id=266, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_A
+ll_neg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_Al
+l_neg.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_agg_All_neg.pdf  used on input line 278.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_All_po
+s.pdf, id=267, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_A
+ll_pos.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_Al
+l_pos.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_agg_All_pos.pdf  used on input line 286.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_bau.pd
+f, id=268, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_b
+au.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_ba
+u.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_agg_bau.pdf  used on input line 294.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [24 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_A
+ll_neg.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_neg.pd
+f, id=278, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_n
+eg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_ne
+g.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_All_neg.pdf  used on input line 302.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+
+[25 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_Al
+l_pos.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_pos.pd
+f, id=289, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_p
+os.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_po
+s.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_All_pos.pdf  used on input line 310.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [26 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_agg_b
+au.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_bau.pdf, i
+d=299, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_bau.p
+df Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_bau.pd
+f>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/xp/USA_xp_bau.pdf  used on input line 318.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [27 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_xp_All_n
+eg.pdf>] [28 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/xp/USA_
+xp_All_pos.pdf>] [29 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim
+/xp/USA_xp_bau.pdf>]
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_neg.pd
+f, id=327, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_n
+eg.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_ne
+g.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/yh/USA_yh_All_neg.pdf  used on input line 331.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_pos.pd
+f, id=328, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_p
+os.pdf Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_po
+s.pdf>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/yh/USA_yh_All_pos.pdf  used on input line 339.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+<Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_bau.pdf, i
+d=329, 505.89pt x 505.89pt>
+File: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_bau.p
+df Graphic file (type pdf)
+<use Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_bau.pd
+f>
+Package pdftex.def Info: Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3
+dim/yh/USA_yh_bau.pdf  used on input line 347.
+(pdftex.def)             Requested size: 292.5pt x 292.50552pt.
+ [30 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_yh_All_n
+eg.pdf>] [31 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim/yh/USA_
+yh_All_pos.pdf>] [32 <Z:/Dropbox/Valentino/Projects/WB_plots/charts/Manage/3dim
+/yh/USA_yh_bau.pdf>] (charts_v00.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1542 strings out of 480202
+ 38918 string characters out of 2885145
+ 293354 words of memory out of 3000000
+ 18095 multiletter control sequences out of 15000+200000
+ 539949 words of font info for 45 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 60i,6n,66p,269b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
+<Z:/99_other_programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><Z
+:/99_other_programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><Z:/99_
+other_programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on charts_v00.pdf (32 pages, 230891 bytes).
+PDF statistics:
+ 369 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+

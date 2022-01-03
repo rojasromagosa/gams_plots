@@ -1,0 +1,626 @@
+\documentclass[11pt,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{afterpage}
+\usepackage{authblk}
+\usepackage{array}
+\usepackage{cmap}
+\usepackage[table]{xcolor}
+
+\widowpenalty=10000
+\clubpenalty =10000
+\textheight 21 cm
+\textwidth 14 cm
+\voffset -1.5 cm
+\hoffset -0.8 cm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Ghana: MANAGE results for different growth-related scenarios}
+\author{Hugo Rojas-Romagosa (MTI, World Bank)}
+\date{10 May 2021}
+\maketitle
+%-----------------------------------------------------------------
+
+\section{Introduction}
+
+We employ a state-of-the-art customized computable general equilibrium (CGE) model to analyze the impact in Ghana of several growth-related scenarios. A first set of scenarios are expected to enhance the growth potential of the country (``bright horizons''), while the second set comprises growth reducing scenarios (``pitfalls''). These growth-related scenarios are organized over four modules: sectoral productivity, trade and FDI, education and climate change. Each module is associated with particular shocks to the model that can increase or decrease growth rates relative to the baseline (``business as usual'') scenario. The magnitude of these shocks are simulated through elasticities derived from the literature and the substitution possibilities between capital, labor and energy in production. Besides these initial direct effects, the model simultaneously determines the indirect (general equilibrium) effects of these shocks on the rest of the economy. For instance, the effects on output for all sectors, labor demand for each skill level in each sector, wages and final consumption prices for all commodities. These effects, in turn, change the real income of each household type through the changes in wages and final consumption prices, conditional on the specific the labor endowments and consumption basket of each household. These changes in household real income are then used to derive the impacts on inequality.  Hence, the CGE results can inform policy makers on the necessary compensatory policies that can mitigate for any negative effects associated with specific scenarios and which populations need to be targeted.  
+
+
+Baseline growth rates for Ghana are relatively high, at around 5\% for the coming 20 years. However, implementing growth-enhancing policies can further increase yearly growth rates by almost two percentage points. This can be achieved by a combination of higher productivity growth in the export-oriented services and manufacturing sectors, trade liberalization and educational improvements. On  the contrary, if productivity growth in services and manufacturing sectors is lower than in the baseline, and FDI growth is also not sustained, then real GDP yearly growth levels should be expected to be around 0.75 percentage point lower than in the baseline. 
+
+
+\section{CGE modeling framework}
+
+This report employs a state-of-the-art customized computable general equilibrium (CGE) model to analyze the impact in Ghana of several growth-related scenarios. We employ the Mitigation, Adaptation and New Technologies Applied General Equilibrium (MANAGE) model, which is the World Bank's recursive dynamic single country computable general equilibrium (CGE) model. It includes all the standard features of CGE models that deal with fiscal policies (i.e. tax, expenditure and investment changes), structural changes in the economy, and it is designed to also analyze on energy, emissions and climate change shocks. The MANAGE model includes a detailed energy specification that allows for capital, labor and energy substitution in production, electricity generation by different energy sources, and a multi-output multi-input production structure. MANAGE is a dynamic model, using mainly a neo-classical growth specification. Labor growth is determined by working age population growth, capital accumulation derives from savings and investment decisions, and there is a wide range of productivity assumptions, including total factor and labor productivity. 
+
+CGE models include a large number of economic activities, commodities, production factors and household types. The model provides detailed mechanisms for the consumption optimization process of households, based on preferences, consumption basket and prices, and the cost-optimization of firms, which implies that each sector chooses labor of different worker types, capital and energy to minimize overall production costs based on factor and energy prices. Annex 1 describes the MANAGE model in detail. The magnitude of the growth-related shocks through the economy is determined by price elasticities derived from the literature and the substitution possibilities between capital, labor and energy in production.The MANAGE CGE model captures the direct effects of different shocks, but also the general-equilibrium (indirect) effects that stem from the complex economic interrelationships among several economic agents (such as firms, government, and several household types), several economic activities and production factors. The model,  moreover, keeps track of macroeconomic identities (e.g. overall investments must equal overall savings), and endowment constraints (labor supplied by household equals labor demanded by firms and the government for each worker type). 
+
+\subsection{MANAGE model for Ghana}
+
+The MANAGE model is sufficiently flexible that it can be calibrated to a relatively large number of Social Accounting Matrices (SAM). In this report, we employ the Ghana 2015 SAM and then update it to 2019 using national accounts and additional macroeconomic data.\footnote{The original 2015 SAM was developed under a collaboration between Ghana Statistical Services (GSS), the Institute of Statistical, Social and Economic Research (ISSER), and the International Food Policy Research Institute (IFPRI).} 
+
+Several adjustments where made to the original SAM, in conjunction with baseline adjustments to calibrate the updated SAM to more recent national account data. These adjustments are explained in Annex 2. The resulting SAM has 38 activities and commodities (with 14 agricultural sectors, 2 extraction, 8 manufacturing and 14 services), eight labor types (classified by level of education, rural and urban), 15 households (divided by rural farm, rural non farm and urban, each aggregated by quintiles based on income level) and four different taxes (sales, direct, import and export).  
+
+%%%% INCLUDE the sectoral classification in the appendix
+
+The baseline (``business as usual'') scenario was constructed using the real GDP growth projections from the latest MFMod estimations (for 2020 to 2023) and the OECD SSP2 long-term growth rates (for 2023 to 2040). As a comparative exercise, we also compared the long-term growth rates between the OECD SSP2 and long-term MFMod projections. The results are presented in Figure \ref{fig_bau_gdp_gr_mfmod} in the Annex, where both projections have almost identical growth rates. Labor supply growth is projected using the growth of working age population, which is taken from the UN population statistics. Figure \ref{fig_bau_gdp_gr} shows the baseline growth rates. After the steep growth reductions caused by the Covid-19 pandemic, growth rates increase to around 6.5\% in 2024 and then growth starts decelerating but with a relatively high rate  above 5\%.
+
+\begin{figure}[ht!]\caption{Baseline, real GDP growth rates (\%)} \label{fig_bau_gdp_gr}
+	\centering
+	\includegraphics[trim=0 0 0 10mm, clip=true, width=0.65\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/bau_gdp_gr.pdf}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Growth scenarios}
+
+The growth scenarios where built around two main themes. Positive growth-enhancing scenarios are under the ``bright horizons'' group, while growth-reducing scenarios fall under the ``pitfalls'' group. In this section we describe each scenario and for simplicity classify them by positive and negative growth effects.
+
+\subsection{Productivity increases in selected sectors}
+
+%% See if/how to justify these scenarios
+%Based on the insights from the Ghana CE and other results from this report, we 
+
+The first set of productivity scenarios assumes TFP and unskilled labor productivity changes in a number of selected service sectors.  For each of these service sectors we run a positive (negative) simulation where productivity is increasing (decreasing): 
+\begin{enumerate}
+	\item Export-oriented services positive (negative) scenarios: For the information communication technology (ICT) sector, business services (BSR), and financial services sectors we impose a 2 percentage point growth increase (decrease) with respect to baseline values for both TFP and unskilled labor productivity
+	\item Labor-intensive services positive (negative) scenarios: For the wholesale and retail trade (TRD), and the `other services' (OSR) sectors we impose a 2 percentage point growth increase (decrease) with respect to baseline values for unskilled labor productivity.
+\end{enumerate}
+
+The real GDP results for these service sector productivity scenarios are shown in Figure \ref{fig_sims_pdy_gdp_pch}. The simulations were productivity is increasing relative to the baseline values (upper graph) show that ICT and business services yield the highest GDP increases, while the financial services and the labor-intensive services (trade and other services) generate much lower GDP increases. Accordingly, when productivity is decreasing (lower graph), the ICT sector generates the largest decreases. However, business services yield comparatively lower GDP decreases. This implies that when productivity is increasing in this sector GDP expands the most, but when productivity is decreasing the negative effects are not very large. 
+
+\begin{figure}[ht!]\caption{Real GDP results, service sectors productivity scenarios} \label{fig_sims_pdy_gdp_pch}
+	\centering
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.5pt}
+\fbox{$
+\begin{array}{c}
+\includegraphics[trim=0 0 0 0mm, clip=true, width=0.65\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_pdyp_gdp_pch.pdf}  \\
+\includegraphics[trim=0 0 0 2mm, clip=true, width=0.65\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_pdyn_gdp_pch.pdf}  
+\end{array} $
+} 
+\end{figure}
+\clearpage
+
+The second set of productivity scenarios assumes that for all manufacturing sectors have TFP and unskilled labor productivity changes. Again, the positive (negative) scenarios impose a 2 percentage point growth increase (decrease) with respect to baseline values for both TFP and unskilled labor productivity. We ran the simulations using all the manufacturing sectors together, and for comparison, we also run two composite (aggregate) scenarios that combine all positive and all negative productivity changes for the services sectors. 
+
+The real GDP results for these these composite productivity scenarios are presented in Figure \ref{fig_simsagg_gdp_pch}. We observe that the manufacturing sectors have also relatively high GDP impacts. These are lower than for the export-oriented services sectors, but much higher than for the labor-intensive services sectors.
+
+\begin{figure}[ht!]\caption{Real GDP results, aggregate services and manufacturing productivity scenarios}  \label{fig_simsagg_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true, width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/simsagg_gdp_pch.pdf}
+\end{figure}
+
+
+The real wage effects for each of the scenarios are presented in Figures \ref{fig_AggSRVhp_wage_pch} to \ref{fig_AggMNFn_wage_pch}, while the real household income results are shown in Figures \ref{fig_AggSRVhp_HHinc_pch} to \ref{fig_AggMNFn_HHinc_pch}, both in the Annex.
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Climate change damage scenarios}
+
+The negative effects of climate change are modeled as part of the negative (pitfalls) scenarios. The values for the climate change damage functions are taken from the meta-study from \citet{Roson_Sartori_2016}. They provide benchmark estimations of six damage functions for relative to temperature increases associated with climate change. For all simulations we assume a +1$^{\circ}$C temperature increase by 2040.\footnote{These values are consistent with most SSP climate scenarios. Note that the divergence in temperature changes for these climate scenarios usually begin until 2050.} These damage functions and the values we use for our simulations are the following:
+\begin{enumerate}
+	\item Reduced arable land from sea level rises: -0.0001\%. 
+	\item Agriculture productivity changes from increased temperatures: maize (-3.4\%), rice (-0.8\%), remaining agro sectors (-3.04\%).
+	\item Labor productivity reductions to increased heat: workers in agriculture (-8.48\%), manufacturing (-2.58\%), services (0.27\%).
+	\item Labor productivity reductions from health (increased incidence of tropical diseases):  -0.63\%.
+	\item Tourism (changes in net foreign currency inflows relative to 2011 GDP): -1.05\%.
+	\item Household energy demand changes (e.g. more air conditioning): 0.28\%.
+\end{enumerate}
+
+Note that the total effects specified above are not expected to fully materialized until 2040. Therefore, we implement these shocks as yearly linear increases starting in 2021 to reach their final value in 2040. The results for each individual damage function are presented in Figure \ref{fig_sim_CC_gdp_pch}. We find that the damages associated with arable land and energy demand are very close to zero. On the other hand, the labor and agricultural productivity negative effects generate the largest GDP loses.
+
+\begin{figure}[ht!]\caption{Real GDP results, individual climate change damage scenarios}  \label{fig_sim_CC_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sim_CC_gdp_pch.pdf}
+\end{figure}
+
+We then run all these climate change negative shocks together and for comparison, we also run a scenario where temperature increase by +2$^{\circ}$C. The first observation, is that the full GDP impact of all climate change damages for our main scenario (with a one degree Celsius temperature increase by 2040) is relatively low. By 2040, when the full effect of the climate change damages is expected to have materialized, we find that real GDP is reduced by only one percentage point. This GDP level reduction with respect to the baseline values, will reduce annual GDP growth rates by less than 0.05 percentages points.
+
+\begin{figure}[ht!]\caption{Real GDP results, aggregate climate change scenarios} \label{fig_simsCCneg_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/simsCCneg_gdp_pch.pdf}
+\end{figure}
+
+Note however, that this does not mean that climate change cannot have much larger negative impacts on GDP. First, our scenarios do not include any negative impacts of increased frequency and/or intensity of natural disasters. Second, the damages functions are simulated as a linear increase in temperatures to the most frequently projected value of +1 degree Celsius by 2040. These temperature projections are based on the SSP climate modeling exercises, in which temperature increases are projected to be more acute only after 2050. This means that the associated climate change damages will only be realized also after 2050 when these larger temperature increases are expected. For instance, with a +2$^{\circ}$C increase in temperature, the GDP losses are twice as large and further temperature increases will create larger negative effects since most damage functions increase more than proportionally to the temperature increases --although these larger then proportional increases are usually only estimated after temperature increases above +3$^{\circ}$C.
+
+Finally, the model does not account for any ``non-linearities'' in climate scenarios, such as reinforcing negative climate events that substantially accelerate temperature increases, and hence, the negative economic damages associated with them. The real wage and household income changes for the aggregate climate change scenario (for our main simulation with a temperature increase of one degree Celsius by 2040) are presented in the Annex (Figures \ref{fig_wage_pch_Dmg} and \ref{fig_HHInc_pch_Dmg}).
+
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Education scenarios}
+
+Changes in education outcomes are modeled through shifts in the skill-composition and the productivity of the labor force. Improvements in labor attainment, through increased years of education, translate into a gradual shift in the education levels of the total work force. When educational attainment is improved, the recently graduated students that enter the labor force will have a higher education level that will improve the overall education level of all workers. Similarly, improvements in education quality will result in students being more productive once they enter the labor market. This process is also gradual, since only the recently graduated students that enter the labor force will have these higher labor productivity levels.
+
+Before we implement the educational attainment shocks, however, we compare the working population skill composition from the 2015 SAM and the Ghana Living Standards Survey 7 (GLSS7) data for 2019. We find significant differences between both data sources. Figure \ref{fig_skill1} below shows these differences, as well as how the composition changes in the baseline scenario. We observe that the share of non-educated workers is much larger in the SAM, while the share of workers with primary education is larger in the GLSS7 data. Afterwards this skill composition using both data sources remains (roughly) constant.\footnote{Figure \ref{fig_sim_LS_gdp_pch} in the Annex presents the baseline GDP results when the GLSS7 data is used instead of the original SAM skill composition.}
+
+\begin{figure}[ht!]\caption{Work force skill composition in 2019 (SAM \& GLSS7) and projected shares for 2040} \label{fig_skill1}
+	\centering
+	\includegraphics[trim=0 20mm 0 20mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/Skill_composition_new.pdf} \\
+{\footnotesize Note: The historical trend and ESP target data are for 2040.}
+\end{figure}
+
+The other two series in Figure \ref{fig_skill1} show two alternative educational attainment scenarios. We project the changes in the work force skill composition based on historical trends and on the Ghana Education Strategic Plan (ESP) targets for enrollment rates by education level. Based on these data we employ the following broad assumptions to project how the labor force skill composition is expected to change for each scenario: 
+\begin{enumerate}
+	\item We use the baseline labor supply increase by year, which varies between 2.7 and 2.2\% over the sample period.
+	\item Assume that 1\% of the workers retire every year.\footnote{Around 0.7\% of the working population turns 65 every year, plus we assume that 0.3\% (around half of the retiring age share) stop quit working every year (due to illness, personal reasons and others).} Then new workers are the percentage increase in total labor supply for each year, plus one percentage point (i.e. between 3.7 and 3.2\%).
+	\item We use the net enrollment rates (NER) for primary, SHS (secondary) and tertiary, for both historical trends and the ESP targets,  and assume a 100\% completion rate for primary, 75\% for SHS and 50\% for tertiary. 
+\end{enumerate}
+
+The ensuing changes in the skill composition by 2040 are shown in Figure \ref{fig_skill1}. The historical trends shows an increase in the share of secondary and tertiary workers, while the share of non-educated and primary educated workers is decreasing. The ESP targets provide additional rises in the share of secondary and tertiary workers, and accordingly, lower share of primary and non-educated workers, when compared to the historical trends. However, even with these improvements in the schooling years of the working population, by 2040 workers with only primary education will still be the largest group. This reflects the  slow transmission between educational attainment that can only benefit workers that will join the workforce, and the overall skill composition of the work force that reflects past educational outcomes. For our education scenarios we will analyze the effects of implementing the ESP targets.
+
+The final educational scenario relates to changes in educational quality. It is well documented that educational quality, more than educational attainment, is the key linkage between educational outcomes and growth. For instance, \citet{Hanushek_Woessmann_2007} find that education quality indicators account for most of the correlation between education and growth differentials between countries. In another study based on US data, \citet{Hanushek_Woessmann_2008} find that a standard deviation in international standardized test scores increases future earnings by 12\%. There are no equivalent international standardized tests for Ghana as those used by these authors. The closest alternative is the Ghana National Education Assessment (NEA), which has a regional standardized test. However, the test scores show no promising changes in recent years. Figure \ref{fig_NEA} shows the latest results and most of the scores are either stagnant or decreasing. The exception is mathematics for primary 6$^{th}$ year students (P6).
+
+\begin{figure}[ht!]\caption{Ghana NEA test results} \label{fig_NEA}
+	\centering
+	\includegraphics[trim=0 175mm 0 20mm, clip=true,width=1\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/NEA.pdf}
+\end{figure}
+
+To proxy the effects of increases in educational quality, we assume that between 2021 and 2040 a standard deviation increase in test scores is achieved. Given the latest results in the NEA test scores this is likely a very optimistic assumption. However, we use it to estimate the potential impact of increased education quality on growth. Using this assumption, labor productivity of new workers between 2021 and 2040 is increasing each year by 0.6\% and reaches a 12\% increase in 2040. This increase is cumulative, since the proportion of workers that have this higher productivity level increases each year. On the other hand, we also assume that workers with no education (or that not completed primary education) do not have any productivity increases associated with better education quality. As with the educational attainment scenario, this educational shock has a gradual effect on the overall labor force, as only the newly graduated workers will have higher labor productivity.
+
+The results of both education scenarios are shown in Figure \ref{fig_sim_Ed_gdp_pch}. We observe that improvements in educational attainment have the largest short- and medium-term effects, but the educational quality effects become much larger over time. This confirms the larger growth potential of quality improvements over number of schooling years in the long run \citep{Hanushek_Woessmann_2007,Hanushek_Woessmann_2008}. Education quality increases the productivity of all newly educated workers and this provides a steady increase in the overall productivity of the workforce. On the other hand, increasing the number of schooling years by worker only shifts the composition of the workforce, and although this has initial benefits (as new workers receive higher wages associated with job with higher education requirements) this has limited benefits since the relative scarcity of higher educated workers is reduced and the wage differential between worker groups is also reduced. This is shown in Figure \ref{fig_sim_Ed_gdp_pch} by the initial real GDP gains by 2025 that, although still positive, between to be less important after 2035.   
+
+\begin{figure}[ht!]\caption{Real GDP results, education scenarios} \label{fig_sim_Ed_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_Ed_gdp_pch.pdf}
+\end{figure}
+
+The wage and household income effects are shown in the Annex (Figures \ref{fig_wage_pch_Ed_A3} to \ref{fig_HHinc_pch_Ed_Q1}). Note here that the workers that benefit the most in terms of wage changes are the non-educated workers, which are a large share of the workforce and they become relatively scarce with respect to other worker types over time. This worker type is important for several economic activities and this means that the demand for these workers is strong, while the labor supply is declining over time because no new workers are expected to be non-educated after 2025. This mismatch between labor demand and supply is what generates the large wage increases for this group. On the other hand, the other worker groups will have an increase in labor supply over time and this relative abundance of educated workers generates a relative decline in their wages. This also means that although the attainment scenario does not yield large long-term growth changes, it does provide a very substantial wage equalization effect. This is also translated into a real income improvement for poorer households.
+
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Trade and FDI scenarios}
+
+The MANAGE model is a single-country CGE does not account for bilateral international trade, since the rest of the World (RoW) is modeled as single SAM account. Therefore, the model is not well suited to deal with trade policy, which requires bilateral trade and trade cost data. Therefore, to assess the impact of the Africa Continental free trade agreement (AfCFTA) we use the trade changes from the World Bank report on the agreement \citep{WB_2020}. In particular, we use the `full' impact of the AfCFTA, which includes tariff cuts, non-tariff measures (NTM) reductions and the implementation of trade facilitation mechanisms. We directly apply the export and import changes from this AfCFTA study into the simulation. Moreover, to proxy for the efficiency gains associated with the trade cost reductions and the trade facilitation measures associated with the agreements, we change TFP to obtain the same real income effects than in the report --i.e. around 6\% increase with respect to the baseline values.
+
+To estimate the growth effects of FDI inflow changes, we assume three scenarios: a 1\% and 2\% growth of FDI net inflows, and a 1\% negative growth of FDI net inflows. To estimate these shocks we use the current FDI share of the total international capital inflows into the country.
+
+The simulation results are shown in Figure \ref{fig_sims_fdi_gdp_pch}. We find that the full implementation of the AfCFTA has the largest GDP enhancing potential, with GDP increasing by almost 7\% with respect to the baseline values, where the trade agreement is not implemented. On the other hand, increases in FDI growth does not generate substantial GDP increases, although a decrease of the growth of FDI does translate into more than proportional reductions in real GDP. This points to the importance of keeping the current  FDI net inflow levels constant or increasing. Note also, that the full implementation of the AfCFTA is also expected to increase FDI levels due to increased investment opportunities for African and non-African firms in the continent, associated with a larger and deeper continental market and the possibilities to integrate the continent into global value chains. These effects, however, are not considered in our simulations.\footnote{A forthcoming report by MTI will explicitly consider the impact of FDI in the context of the AfCFTA.}
+
+The real wage and household income effects for these scenarios are presented in Figures \ref{fig_AFT1_wage_pch} to \ref{fig_FDI1n_HHinc_pch} in the Annex.
+
+\begin{figure}[ht!]\caption{Real GDP results, trade and FDI scenarios}\label{fig_sims_fdi_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_fdi_gdp_pch.pdf}
+\end{figure}
+
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Overall positive and negative growth scenarios}
+
+To assess the overall effects of all the previous growth-related scenarios, we create composite (aggregated) scenarios that are divided into the positive (``bright horizons'') and negative (``pitfalls'') overall scenarios. For the overall positive scenario, we use the following shocks:
+	\begin{enumerate}
+		\item Positive productivity shocks for manufacturing and selected services sectors.
+		\item Education improvements in attainment  and quality.
+		\item AfCFTA impact and a 1\% growth in net FDI inflows.
+	\end{enumerate}
+\bigskip
+For the overall negative scenario, we use the following shocks:
+	\begin{enumerate}
+		\item Negative productivity shocks for manufacturing and selected services sectors.
+		\item Climate change damages with a 1$^{\circ}$C temperature increase.
+		\item A negative 1\% growth in net FDI inflows.
+	\end{enumerate}
+
+Figure \ref{fig_sims_all_gdp} shows the results of these overall scenarios. The overall positive (``bright horizons'') scenario yields a GDP increase that is around 26\% higher than in the baseline (upper graph), which translates into almost 2 percentage points (p.p.) additional yearly growth rates. The overall negative (``pitfalls'') scenario generates GDP loses of around 13\% when compared to the baseline, or around 0.75 p.p. lower yearly growth rates. 
+ 
+ \begin{figure}[ht!]\caption{Real GDP results for overall (aggregate) scenarios} \label{fig_sims_all_gdp}
+\centering
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.5pt}
+\fbox{$
+\begin{array}{c}
+	\includegraphics[trim=0 0 0 0mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_all_gdp_pch.pdf} \\
+	\includegraphics[trim=0 0 0 0mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_all_gdp_grdf.pdf}
+\end{array} $
+} 
+\end{figure}
+
+These asymmetric results directly reflects the inclusion of different shocks for each overall scenario. For instance, the overall positive scenario includes positive educational and trade shocks that do not have a counterpart in the overall negative scenario. From Figure \ref{fig_sims40p_gdp_pch} we find that the contribution of the trade scenario (implementing the AfCFTA) has larger effects than the education scenarios. In addition, the productivity increases for the export-oriented services and for the manufacturing sectors create the largest GDP gains. 
+
+\begin{figure}[ht!]\caption{Real GDP level effects by 2040 for all positive scenarios} \label{fig_sims40p_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims40p_gdp_pch.pdf}
+\end{figure}
+
+On the other hand, the overall negative scenario has negative climate change shocks that are not considered in the overall positive scenario. However, these climate change shocks are relatively small when compared with the other shocks implemented (see Figure \ref{fig_sims40n_gdp_pch}). Here again, the most important scenarios are the ones with productivity changes for the export-oriented services and the manufacturing sectors.
+
+
+\begin{figure}[ht!]\caption{Real GDP level effects by 2040 for all negative scenarios} \label{fig_sims40n_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims40n_gdp_pch.pdf}
+\end{figure}
+
+ \clearpage
+ 
+ The larger proportionally positive effects of the ``bright horizons'' scenarios, when compared with the ``pitfalls'' scenarios is also reflected in real GDP and GDP per capita increases that are much larger than the equivalent decreases in the second overall scenario. This is shown in Figures \ref{fig_gdp_line} and \ref{fig_gdp_line_pc}. These larger GDP level changes are also reflected in higher GDP and GDP per capita growth  (see Figures \ref{fig_gdp_gr} and \ref{fig_gdp_pc_gr}.
+ 
+ \begin{figure}[ht!]\caption{Real GDP levels for baseline and overall scenarios}  \label{fig_gdp_line}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/gdp_line.pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real GDP per capita levels for baseline and overall scenarios}\label{fig_gdp_line_pc}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/gdp_line_pc.pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real GDP growth for baseline and overall scenarios}\label{fig_gdp_gr}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/gdp_gr.pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real GDP per capita growth for baseline and overall scenarios}\label{fig_gdp_pc_gr}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/gdp_pc_gr.pdf}
+\end{figure}
+
+\clearpage
+
+When we look at changes in real wages, we find that the overall positive scenario benefits disproportionately the non-educated workers (see Figure \ref{fig_wage_pch_All_pos}). This reflects mainly the educational changes where the number of non-educated workers is constantly reduced over time and this is reflected in a relative scarcity of these type of workers with respect to other low-skill workers. This generates very large real wage gains for the non-educated workers, and losses for the primary and secondary workers (which become more abundant in the economy). The workers with tertiary education, both rural and urban, which are more intensively used in the services sectors, experiment relative wage gains with respect to other less educated workers. 
+
+For the overall negative scenario, Figure \ref{fig_wage_pch_All_neg} shows that the real wages for all workers are negatively affected, but the higher educated (secondary and tertiary) are affected the most, since these workers are more intensively used in the services and manufacturing sectors, which are the most affected in this scenario. 
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, overall positive scenario}\label{fig_wage_pch_All_pos}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ All positive scenarios .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, overall negative scenario} \label{fig_wage_pch_All_neg}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ All negative scenarios .pdf}
+\end{figure}
+
+\clearpage
+
+Finally, when we look at the effects of both overall scenarios on real household income changes (see Figures \ref{fig_HHInc_pch_All_pos} and \ref{fig_HHInc_pch_All_neg}). We observe that urban households are benefiting the most from the positive scenario, but mostly the lower income (Q1) households. This reflects the large relative wage gains from the non-educated workers, which represent a large income share for this income group. This pattern is also reflected in the rural farm and rural no-farm households, where again the lowest income (Q1) groups are benefiting the most. For the negative scenario, we observe that urban households are now the most affected, mainly because of the reduction o the manufacturing and services sectors productivity. We also observe that within household groups (urban, rural farm and rural no-farm), the richer household usually have the largest losses, although in general the real income between groups does not vary too much. Overall, these results imply that income distribution should be improving in both scenarios.
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, overall positive scenario} \label{fig_HHInc_pch_All_pos}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ All positive scenarios .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, overall negative scenario} \label{fig_HHInc_pch_All_neg}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ All negative scenarios .pdf}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+%\bibliographystyle{../../HRR/LaTex/ecta_hrr_nocap} 
+\bibliographystyle{../../HRR/LaTex/ecta} 
+\bibliography{../../HRR/LaTex/hrr_cge_WB}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\appendix
+
+\section{Annex 1: Specification of the MANAGE CGE model}
+
+The following sections provide an overview of the key relationships in th MANAGE CGE model. A detailed discussion of the model can be found in \citet{vdMensbrugghe_2017} . The model is developed from the neoclassical structural modeling approach \citep[cf.][]{Dervis_etal_1982}. The underlying assumptions are mainly those encountered in the standard CGE literature \citep{deMelo_Tarr_1992, Dixon_Jorgenson_2013}. 
+
+\subsection{Production}
+
+The model considers an economy with multiple economic activities that produce commodities.\footnote{The exact number of activities and commodities is defined by the dimensions of the underlying SAM (explained below).} All sectors are assumed to produce under conditions of constant returns to scale and perfect competition, implying that prices equal the marginal costs of output. Producers maximize their profits by minimizing their unit variable cost under the constraint of a multi-level production function (illustrated in Figure \ref{prod_str}. At the top level, output is obtained by combining value added and the intermediate aggregates, following a Leontief production technology. Therefore, any policy affecting a specific sector would affect that sector directly, but also indirectly affect them using the output of the sector as intermediate consumption. 
+
+At the second level, the intermediate aggregates are obtained by combining all products in fixed proportions (Leontief structure), and total value added is obtained by aggregating the primary factors (capital, labor, land and natural resources) and energy using a nested structure. At each nest, firms make price-sensitive decisions regarding the inputs into production. For example, in the first nest, capital and skilled labor are combined into a bundle (KSK bundle) based on the rental price of capital relative to the wage for skilled workers. An increase in wages would cause firms to substitute away from skilled labor towards capital. Using a nest allows the model to better capture the production decisions made by firms by tailoring the degree of sensitivity of each decision to relative prices. 
+
+In the next nest, this capital and skilled labor bundle is combined with natural resources (KF bundle). Unlike standard CGE models, ENVISAGE allows for firms to determine the energy intensity of production; the KF bundle is combined with energy (KEF bundle). In agriculture sectors, the KEF bundle is combined with land before it is combined with unskilled labor. For non-agriculture sectors, the KEF bundle is combined with unskilled labor.
+
+\begin{figure}[ht!] \caption{MANAGE production structure} \label{prod_str}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth, angle=270]{../../HRR/LaTex/MANAGE_prod_str.pdf}
+\end{figure}
+
+Moreover, we assume that there is capital-skill complementarity following skill-biased technological changes \citep[cf.][]{Krusell_etal_2000}. In this setting new (ITC-related) capital directly substitutes for unskilled workers and benefits skilled workers. The empirical evidence for this capital-skill complementarity is broad and has been found for many countries \citep{Duffy_etal_2003,Ohanian_etal_2021}. This implies that the elasticity of substitution in the KSK bundle is lower than one, reflecting the factor complementarity between capital and skill labor. On the other hand, the elasticity of substitution in the value added (VA) bundle will be above one generating factor substitutability between capital and unskilled labor.\footnote{Note however, that in both cases a decrease in the price of capital will imply a gross substitution away from labor. In the case of skilled labor, the decrease will be less than proportional to the change, while it will be more than proportional for unskilled labor. In other words, capital improvements through productivity and/or prices will negatively affect unskilled workers disproportionately more than skilled workers. This mechanism yields skill-biased technological change, were capital improvements associated with technological change generate  larger wage increases for skilled workers relative to unskilled workers.} 
+
+
+\subsection{Factor markets}
+
+Factor markets are assumed to be in perfect competition. The labor market is segmented between different workers type, which are determined by the underlying SAM dimensions. Each type of labor is perfectly mobile across the different sectors of production within a region; in the absence of wage gaps across sectors, this implies a uniform wage across all sectors within a region. The wage is set according to supply and demand of labor in each segment; flexible wages clear the markets for the two segments.
+
+The current version of the model assumes market clearing wages on the labor markets with the possibility of an upward sloping labor supply schedule and sluggish mobility of labor across sectors. Introduction of more labor market segmentation (for example rural versus urban) and some form of wage rigidity could be readily implemented.
+
+
+For capital markets, MANAGE distinguishes between two vintages of capital: ``Old'' and ``new''. Industries in decline release capital and this is added to the available stock of ``new'' capital. This ``new'' capital is fully mobile across sectors. This allows the model to capture some rigidities in the capital market by assuming that declining sectors will first release the most mobile types of capital. Capital in expanding sectors earn the same rate of return, while capital in declining sectors has a lower rate of return.
+
+\subsection{Household income and consumption}
+
+The model consists of ten representative households that are divided by income level (aggregated into quintiles) and urban/rural. Each household type supplies one or several of the different labor types and receive wages in return. The amount of labor supplied is exogenous to the model. Households also receive income and transfers from other agents, including the profits from asset holdings. Households use their earnings for consumption, savings, and transfers.
+
+Household demand is modeled using the constant-differences-in-elasticity (CDE) demand function that is the standard utility function used in other CGE models. The model allows for a different specification of demanded commodities (indexed by $k$) from supplied commodities (indexed by $i$). A transition matrix approach is used to convert consumer goods to supplied goods that also relies on a nested CES approach. The transition matrix is largely diagonal in the current version with consumed commodities directly mapped to supplied commodities. Energy demand is bundled into a single commodity and disaggregated by energy type using a CES structure that allows for inter-fuel substitution. Other final demand is handled similarly, though the aggregate expenditure function is a CES function rather than the CDE.
+
+Goods are evaluated at basic prices with tax wedges. The model incorporates trade and transport margins that add an additional wedge between basic prices and end-user prices. The trade and transport margins are differentiated across transport nodes --farm/factory gate to domestic markets and the border (for exports), and from port to end-user (for imports).
+
+Import demand is modeled using the ubiquitous Armington assumption, i.e. goods with the same nomenclature are differentiated by region of origin \citep{Armington_1969}. This allows for imperfect substitution between domestically produced goods and imported goods. The level of the CES elasticity determines the degree of substitutability across regions of origin. Domestic production is analogously differentiated by region of destination using the constant-elasticity-of-transformation (CET) function. The ability of producers to switch between domestic and foreign markets is determined by the level of the CET elasticity. The model allows for perfect transformation in which case the law-of-one price must hold.
+
+Market equilibrium for domestically produced goods sold domestically is assumed through market clearing prices. By default, the small country assumption is assumed for export and import prices and thus they are exogenous, i.e. export levels do not influence the price received by exporters and import demand does not influence (CIF) import prices. The model does allow for implementation of an export demand schedule and an import supply schedule in which case the terms-of-trade would be endogenously determined.
+
+\subsection{Macroeconomic closures}
+
+Macroeconomic closures determine how macro balances are restored after a shock. Specifically, these closures specify how the model achieves (i) balanced government accounts, (ii) the macro equilibrium of the capital account (i.e., the investment and savings balance), and (iii) the macro equilibrium of the accounts with the rest of the world (i.e. external balance). The closure rules adopted in the model are discussed below. The government budget balance is exogenous across different scenarios, as is the level of government spending (in real terms). Hence, the level of direct taxes is endogenous and adjusts, in response to policies and economic shocks, to cover any changes in the revenues in order to keep the fiscal balance at the exogenous level.
+ 
+For the savings-investment balance, we assume a savings-driven closure. Aggregate investment --which together with an exogenous rate of depreciation determines the next period's capital stock-- is flexible to ensure that the investment cost will be equal to the savings value. The volume of available savings is determined by an exogenous level of foreign savings, endogenous government savings, and endogenous household savings. In this context, an increase in government revenue, from a new source of tax revenue for example, would also be reflected in higher public savings and therefore stimulate current investment and growth.
+
+External balance ensures that the path of foreign liabilities is sustainable. This is achieved through adjustment of the real exchange rate, while the current account is fixed by the available quantity of foreign saving. To maintain the current account constant, domestic prices adjust to generate appropriate changes in the volumes of imports and exports demanded. The main implication of this closure is that an increase in exports, for example, would generate an appreciation of the real exchange rate, penalizing the competitiveness of the non-mining sector --i.e. a Dutch disease effect.
+
+\subsection{Dynamic behavior of the model}
+
+The dynamic path follows the neoclassical growth framework. It employs a Solow-Swan growth mechanism, implying that the long-run growth rate of the economy is determined by three main factors: capital accumulation, labor supply growth, and increases in productivity. The stock of capital is endogenous, while the latter two are exogenously determined:
+\begin{itemize}
+	\item Capital accumulation. The capital stock in each period is the sum of depreciated capital from the previous period and new investment.
+	\item Labor supply. For each type of labor, the maximum stock of labor available in each period grows exogenously based on population projections of the working-age cohort (15 to 64 years old).
+
+	\item Productivity. For the final determinant of growth, MANAGE assumes exogenous technical progress specific to sector and production factors. Thus, in the simulations, the real GDP growth rate differs from the growth rate under the baseline scenario due to the policy or shock being simulated. Specifically, policies or shocks affect real GDP growth through their effects on the accumulation of labor and capital. The model can also reflect productivity improvements due to higher energy efficiency and changes in the cost of international trade and transport services.
+\end{itemize}
+
+\subsection{Caveats in the CGE modeling framework}
+
+The methodology assumes free and frictionless movement of labor and capital across sectors. This is a simplification, since there might be frictions preventing factors from moving out of sectors in decline and into expanding sectors. While the methodology has limitations, it illustrates a country's potential to adjust and reap the benefits of the changing structure of the economy or to absorb negative shocks, such as the negative impacts of climate change. The frictionless adjustment of labor and capital to external shocks and the immediate change in relative prices that are required to return to a general equilibrium, imply that the model is not well suited to analyze short-term shocks, nor business-cycle fluctuations.
+
+Like most CGE models, the current model does not capture the productivity effect of policy shocks as technological progress is exogenous. This is another limitation as recent economic literature emphasizes the potential benefits of different structural changes on productivity. For example, trade diversification, carbon pricing, fiscal policies and infrastructure investments are usually associated with productivity gains that will not be directly capture by the model, unless they are explicitly included as additional shocks.
+
+
+\section{Updated SAM and baseline adjustments}
+
+Several adjustments where made to the original 2015 SAM to accomodate it to the general framework of MANAGE. First, the original 55 activities and 56 commodities were reduced to 38 each. This reduces the dimensions of the modelling exercise, while retaining the main sectors of interest.  Second, the original SAM had four capital types (crops, livestock, mining, other), and these were aggregated into a single capital type, which is the standard in MANAGE. Third, own consumption activities (i.e. activities going directly to HH consumption in original SAM) where included in standard consumption accounts. Accounting for own consumption will require structual changes to the MANAGE model, and own consumption was not regarding as a key topic of interest for this report. Finally, inventory stock changes where taken away, since these usually capture large statistical discrepancies in the national accounts. 
+
+Within this adjusted SAM, wew employed national account and additional macroeconomic data to update the SAM from 2015 to 2019 values. We directly used the changes in the expenditure accounts (private and public consumption, investment, exports and imports). Hence, the trade balance is indirectly also targeted for 2019. When then match the fiscal deficit as share of GDP in 2019. The remaining accounts where expanded by the GDP increase and the full SAM was then re-balanced. To combine and balance the SAM using all these data sources, we employed the cross-entropy method developed by \citet{Robinson_etal_2001}. The ensuing SAM has 38 activities and commodities, 10 production factors (land, capital plus eight worker types), four taxes (sales, direct, import and export), and 19 institutional accounts (15 household types, firms, government, investment and rest of the World).  
+
+The baseline (``business as usual'') scenario was constructed using the real GDP growth projections from MFMod (for 2020 to 2023) and the OECD SSP2 long-term growth rates (for 2023 to 2040). Note that we use the latest MFMod upside estimations. Labor supply growth is projected using the growth of working age population, which is taken from the UN population statistics. Workers by activity where calibrated using GIDD dataset. 
+
+An important adjustment is that the 2015 SAM had significant different in the structural composition of the economy, when divided by main sectoral aggregates (agriculture, manufacturing, extraction and services). See Figure \ref{fig_NatAcc_secstr}. Therefore, we re-calibrated the model to provide a better fit to the latest 2019 national account data. This required rebalancing the 2019 SAM and imposing sectoral adjustments in some sectors (coconut, extraction sectors, business services and others). After 2020, we assume that agriculture follows its latest trend and its share in total output is decreasing, while services are increasing. Extraction and manufacturing activities retain their output shares throughout the whole period (see Figure \ref{fig_bau_secstr}
+
+
+\begin{figure}[ht!]\caption{Baseline projections, Sectoral structure from national accounts (old and new series)}  \label{fig_NatAcc_secstr}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/NatAcc_secstr_new.pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Baseline projections, sectoral structure} \label{fig_bau_secstr}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/bau_secstr.pdf}
+\end{figure}
+As a comparative exercise, we also compared the long-term growth rates between the OECD SSP2 and long-term MFMod projections. After 2030 both projections have almost identical growth rates. The MFMod long-term growth rates are built using the following assumptions:
+\begin{itemize}
+	\item Data is in constant local currency units, with 2015 as base year
+	\item Historical data runs from 1981 until 2019
+	\item	MPO forecasts by the country economists run from 2020 until 2023
+	\item After 2023, the forecasts are based on the following assumptions:
+	\begin{itemize}
+		\item Potential GDP grows with employment growth and ``TFP growth divided by the labor share''
+		\item GDP gap is given at the end of 2023 and closes over time so that GDP approaches Potential GDP
+		\item TFP growth is given by previous period TFP growth and a long term world TFP growth rate of 1\%. 
+		\item TFP growth is very persistent: it mainly depends on last period's TFP growth (weight for pervious TFP growth: 0.99 and long term world growth rate weight: 0.01)
+		\item Employment: depends mainly on previous growth of employment and a long run world growth rate of employment of 1\% with the a weight of 0.99 on previous country specific growth
+%		\item Employment alternative: we could grow employment with HNP projections on population instead of previous employment growth. That would lead to smaller GDP growth numbers (HNP states pop growth of around 1.86\%  in 2030 for example, our approach uses a growth rate of 2.1\%)
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht!]\caption{Real GDP long-term growth rates (\%),  SSP2 (OECD) compared to MFMod (in orange)} \label{fig_bau_gdp_gr_mfmod}
+	\centering
+	\includegraphics[trim=0 0 0 10mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/bau_gdp_gr_mfmod.pdf}
+\end{figure}
+
+\newpage
+\section{Additional tables}
+
+
+\subsection{Sectoral productivity scenarios}
+% WAGES
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate export services positive scenario} \label{fig_AggSRVhp_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Export serv. productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate export services negative scenario} \label{fig_AggSRVhn_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Export serv. productivity (negative) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate labor-intensive services positive scenario} \label{fig_AggSRVlp_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ L-intensive serv. productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate labor-intensive services negative scenario} \label{fig_AggSRVln_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ L-intensive serv. productivity (negative) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate manufacturing positive scenario} \label{fig_AggMNFp_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Manufacturing productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate manufacturing negative scenario} \label{fig_AggMNFn_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Manufacturing productivity (negative) .pdf}
+\end{figure}
+
+\clearpage
+
+% HH INCOME
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate export services positive scenario} \label{fig_AggSRVhp_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Export serv. productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate export services negative scenario} \label{fig_AggSRVhn_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Export serv. productivity (negative) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate labor-intensive services positive scenario} \label{fig_AggSRVlp_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ L-intensive serv. productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate labor-intensive services negative scenario} \label{fig_AggSRVln_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ L-intensive serv. productivity (negative) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate manufacturing positive scenario} \label{fig_AggMNFp_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Manufacturing productivity (positive) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate manufacturing negative scenario} \label{fig_AggMNFn_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.8\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Manufacturing productivity (negative) .pdf}
+\end{figure}
+\clearpage
+
+\subsection{Climate change scenarios}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, aggregate climate change scenarios (1C) } \label{fig_wage_pch_Dmg}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Climate damages (1C) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, aggregate climate change scenarios (1C)} \label{fig_HHInc_pch_Dmg}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Climate damages (1C) .pdf}
+\end{figure}
+
+\clearpage
+\subsection{Education scenarios}
+
+%\begin{figure}[ht!]\caption{Real wage results, educational attainment scenario with historical trend} \label{fig_wage_pch_Ed_A2}
+%	\centering
+%	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Educational attainment (A2) .pdf}
+%\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, educational attainment scenario with ESP targets} \label{fig_wage_pch_Ed_A3}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Educational attainment (A3) .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, educational quality scenario}\label{fig_wage_pch_Ed_Q1}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ Educational quality .pdf}
+\end{figure}
+
+
+%\begin{figure}[ht!]\caption{Real household income results, educational attainment scenario with historical trend} \label{fig_HHinc_pch_Ed_A2}
+%	\centering
+%	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Educational attainment (A2) .pdf}
+%\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, educational attainment scenario with ESP targets}\label{fig_HHinc_pch_Ed_A3}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Educational attainment (A3) .pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, educational quality scenario} \label{fig_HHinc_pch_Ed_Q1}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ Educational quality .pdf}
+\end{figure}
+
+\clearpage
+\subsection{Trade and FDI scenarios}
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, AfCFTA scenario} \label{fig_AFT1_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ AfCFTA .pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, FDI increases (1\% growth) scenario} \label{fig_FDI1_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ FDI 1 percent growth .pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, FDI increases (2\% growth) scenario}  \label{fig_FDI2_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ FDI 2 percent growth .pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real wage results by labor type, FDI increases (minus 1\% growth) scenario}  \label{fig_FDI1n_wage_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/wage_pch_ FDI minus 1 percent growth .pdf}
+\end{figure}
+
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, AfCFTA scenario} \label{fig_AFT1_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ AfCFTA .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results, FDI increases (1\% growth) scenario} \label{fig_FDI1_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ FDI 1 percent growth .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, FDI increases (2\% growth) scenario} \label{fig_FDI2_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ FDI 2 percent growth .pdf}
+\end{figure}
+
+\begin{figure}[ht!]\caption{Real household income results by household type in 2040, FDI increases (minus 1\% growth) scenario} \label{fig_FDI1n_HHinc_pch}
+	\centering
+	\includegraphics[trim=0 0 0 12mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/HHinc_pch_ FDI minus 1 percent growth .pdf}
+\end{figure}
+
+
+
+
+\clearpage
+
+\section{Additional simulations}
+
+The main simulations assume an upward slopping wage-labor supply curve that implies that labor supply changes proportionally to real wage using an elasticity of 0.1. Thus, a 1\% increase in the real wage generates a 0.1\% increase in the labor supply. To assess the importance of this model feature in the results, we estimate the baseline growth rates with a fixed labor supply (i.e. the wage-labor supply elasticity is set at zero). The results are shown in Figure \ref{fig_sim_LS_gdp_pch}. There we also show how the baseline is affected when we calibrate the work force skill-labor composition using the GLSS7 data, instead of the original 2015 SAM data.
+
+\begin{figure}[ht!]\caption{Baseline, real GDP levels with alternative labor supply and educational attainment assumptions} \label{fig_sim_LS_gdp_pch}
+	\centering
+	\includegraphics[trim=0 0 0 7mm, clip=true,width=0.75\textwidth]{C:/Users/wb388321/OneDrive - WBG/Projects/GHA/Graphs/sims_LS_gdp_pch.pdf}
+\end{figure}
+
+One additional scenario that was considered was to increase the rate of female labor participation rates. However, these rates are already relatively high in Ghana (65.4\% in 2019) and comparable to the rates in other Sub-Sahran Africa countreis  (62.8\%) and OECD member (64.8\%). In fact, these rates have been steadily declining in Ghana. For instance, the female labor participation rate was as high as 73.4\% in 2001.
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
