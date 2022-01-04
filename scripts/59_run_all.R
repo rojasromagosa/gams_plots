@@ -15,29 +15,32 @@ rm(list = ls())
 try(setwd("~/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
 try(setwd("C:/Users/valdes/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
 try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
-try(setwd("somewhere/Hugo/Github/plots/fixme/Rcode_Valentino") , silent = T)
+#try(setwd("C:/Users/wb388321/OneDrive - WBG/Projects/STC_Valentino/Rcode_Valentino") , silent = T)
+try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
+
 
 #' Set the name of folder where the gdx files are located
 #input_dir <- file.path(getwd(), "input_data/Manage")
-input_dir <- file.path(getwd(), "input_data/Envisage")
-
+#input_dir <- file.path(getwd(), "input_data/Envisage")
+input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/res")
 
 #' directory where to save all plots (the folder needs to exist already)
 #chart_dir <- file.path(getwd(), "charts/Manage")
-chart_dir <- file.path(getwd(), "charts/Envisage")
-
+#chart_dir <- file.path(getwd(), "charts/Envisage")
+chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
 
 #' GAMS directory
-gams_dir <- "C:/GAMS/36"
+#gams_dir <- "C:/GAMS/36"
+gams_dir <- "C:/Program Files/GAMS36"
 
 #' names of files to be imported (there is one file for each simulation)
 # input_files <- c("BaU.gdx", "Sim1_RenW.gdx", "Sim2_RenAlt.gdx") # use a list of files
 input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of files with a gdx extension
 
 #' name of the Excel file containing the list of variables
-input_excel <- file.path( getwd(),
-                          #"input_variables_list/Manage_input_variables_list_v01.xlsx"
-                          "input_variables_list/Envisage_input_variables_list_v00.xlsx"
+#input_excel <- file.path( getwd(),
+input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx"
+                          #"input_variables_list/Envisage_input_variables_list_v02.xlsx"
                           )
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
