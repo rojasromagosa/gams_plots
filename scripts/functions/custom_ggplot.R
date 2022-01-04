@@ -51,19 +51,21 @@ my_theme3 <- theme(text=element_text(size=11), #default text size
                    legend.title = element_text(size = rel(1.1))
 )
 
-my_themeNoTtl <- theme(text=element_text(size=11), #default text size
+
+my_themeNoTtl <-   theme(text=element_text(size=11), #default text size
                    panel.border = element_blank(), # delete panel border
                    panel.background = element_rect(fill = NA), # fill in background 
-                   panel.grid.major = element_line(colour = "grey90"), # color of grid
+                   panel.grid.major.y = element_line(colour = "grey90"), # color of grid
                    axis.line = element_line(),  # add axis lines
                    plot.title = NULL, #element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
                    plot.subtitle = NULL, #element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
                    axis.title.x = element_text(size = rel(1)),
                    axis.title.y = element_text(size = rel(1)),
                    axis.text.x = element_text(size = rel(1)),
-                   axis.text.y = element_text(size = rel(1)),
+                   axis.text.y = element_text(size = rel(1), margin = margin(t=0, r=10, b=0, l=0)),
                    legend.text = element_text(size = rel(1)),
                    legend.title = element_text(size = rel(1.1))
+                  
 )
 
 

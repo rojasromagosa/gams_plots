@@ -15,11 +15,13 @@ rm(list = ls())
 try(setwd("~/Dropbox/Valentino/Projects/WB_plots") , silent = T)
 try(setwd("C:/Users/valdes/Dropbox/Valentino/Projects/WB_plots") , silent = T)
 try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots") , silent = T)
-try(setwd("somewhere/Hugo/Github/plots/fixme") , silent = T)
+#try(setwd("somewhere/Hugo/Github/plots/fixme") , silent = T)
+try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
 
 #' This is the path to the folder where all plots are located
 #' (this location will be searched recursively)
-charts_path <- file.path(getwd(), "charts/Manage")
+#charts_path <- file.path(getwd(), "charts/Manage")
+charts_path <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Dependencies ----
@@ -36,7 +38,7 @@ lapply(packages, library, character.only = TRUE)
 
 #' We need the list of variables only for the variables labels?
 
-input_excel <- file.path("Rcode_Valentino/input_variables_list/Manage_input_variables_list_v00.xlsx")
+input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx")
 
 d_var <- bind_rows(read_excel(input_excel,  sheet = "2dim"), 
                    read_excel(input_excel,  sheet = "3dim"))
@@ -46,7 +48,7 @@ d_var <- bind_rows(read_excel(input_excel,  sheet = "2dim"),
 ## Read in template ----
 
 #' This is an empty latex file
-d <- read.delim("Rcode_Valentino/latex/latex_test/template_v00.tex", header = F)
+d <- read.delim("C:/Users/wb388321/Documents/GitHub/gams_plots/latex/latex_test/template_v00.tex", header = F)
 
 
 # test writing file
@@ -153,7 +155,7 @@ d_out <- data.frame(
 
 # save file
 write.table(d_out,
-            file = "Rcode_Valentino/latex/latex_test/charts_v00.tex",
+            file = "C:/Users/wb388321/Documents/GitHub/gams_plots/latex/latex_test/charts_v00.tex",
             sep = "\t", 
             quote = F,
             col.names = F,
