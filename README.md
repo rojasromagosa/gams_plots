@@ -1,14 +1,31 @@
-This repository contains R code for creating charts using GAMS simulations data.
+This repository contains R code for creating charts using GAMS simulations data. Both ENVISAGE and MANAGE files can be processed.
 
-General info:
-1. Read in gdx data using the **gdxrrw** package. This requires that GAMS is already installed.
+# General info
+1. The raw data, in gdx format, is imported using the **gdxrrw** package. This requires that GAMS is already installed.
+2. Both ENVISAGE and MANAGE have many variables of different dimensions. MANAGE has an implicit dimension for all variables, given it contains only one region/country, instead of many. Therefore a 1 dimensional variable in MANAGE (e.g. GDP, which varies only across time) is equivalent to a 2 dimensional variable in ENVISAGE (region/country - time). Therefore, for each MANAGE variable, an "artificial" dimension containing the name of the country is created. This allows the use of the same code for both models.
 
-3. At the moment there is just one R file, in which common functions are defined, and used to import and plot different variables.
-4. The input folder is empty, as the data is very heavy.
-5. At the moment there are two functions that can be used to process different variables:
-	* **import.data**: in general there will be multiple gdx files, one for each simulation. This function can be applied to a vector of names containing the names of the simulations, to read in specific variables from each simulation:
-		* variables of any dimensions can be imported. The labels of the dimensions are matched automatically
-		* by setting **var_name0 = T** the values are multiplied by its "var0" value. 
-		* by setting **inScale = T** the values are rescaled using the parameter "inScale"
-	* **growth.changes**: the output of the above function can be passed to this function in order to calculate growth rates between values in the same simulation, and perchantage changes wrt to the baseline. Note that the number of dimensions to pass to **dplyr::group_by** is detected automatically (assumed to be everything except for the column containing the values, and the "t" dimension)
-6. To produce plots for the different dimensions we use "purr:map" or "purr:map2". When the dimensions are more than one, the combinations can be calculated using "tidyr::crossing". Plots are saved in a folder having the same name as the variable.  
+# Data preparation
+1. The selection of variables to read in is done via an Excel file. Additional info can be found in the readme of the Excel file. For each variable, it is necessary to specify which charts are to be produced. The preparation of the data follows these steps and is identical for variables of different dimensions
+* Fill in default values in the Excel file when not options are not speficied
+* Call the *import_data* function for each combination of variable and simulation gdx file
+* Call the *changes_wrt_baseline* function to calculate growth rates, and percentage change wrt baseline. Note that the number of dimensions to pass to **dplyr::group_by** is detected automatically (assumed to be everything except for the column containing the values, and the "t" dimension)
+
+# Charts
+1. Every row of the input Excel file corresponds to a specific chart for a given variable. Names of the charts in the Excel file needs to match the names of the charts as specified in the R code. Given its modular construction, additional charts types can be easily added.
+2. In the Excel file, for each chart, a given chart style can be choosen. Given its modular construction, additional charts styles can be easily added.
+
+
+# Scripts structure
+* *59_run_all*: this is the main script, where directories should be defined (setwd, input_dir, chart_dir, gams_dir, input_excel). The following scripts are sourced automatically, and create the charts for 2 and 3 dimensional variables, respectively.
+	* *51_2dimensions*
+		* year_fx
+		* import_data
+		* changes_wrt_baseline 	
+	* *52_3dimensions* 
+		* year_fx
+		* import_data
+		* changes_wrt_baseline 	
+
+
+
+
