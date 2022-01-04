@@ -2,7 +2,7 @@ This repository contains R code for creating charts using GAMS simulations data.
 
 # General info
 1. The raw data, in gdx format, is imported using the **gdxrrw** package. This requires that GAMS is already installed.
-2. Both ENVISAGE and MANAGE have many variables of different dimensions. MANAGE has an implicit dimension for all variables, given it contains only one region/country, instead of many. Therefore a 1 dimensional variable in MANAGE (e.g. GDP, which varies only across time) is equivalent to a 2 dimensional variable in ENVISAGE (region/country - time). Therefore, for each MANAGE variable, an "artificial" dimension containing the name of the country is created. This allows the use of the same code for both models.
+2. Both ENVISAGE and MANAGE have many variables of different dimensions. MANAGE has an implicit dimension for all variables, given it contains only one region/country, instead of many. A 1 dimensional variable in MANAGE (e.g. GDP, which varies only across time) is equivalent to a 2 dimensional variable in ENVISAGE (region/country - time). Therefore, for each MANAGE variable, an "artificial" dimension containing the name of the country is created. This allows the use of the same code for both models.
 
 # Data preparation
 1. The selection of variables to read in is done via an Excel file. Additional info can be found in the readme of the Excel file. For each variable, it is necessary to specify which charts are to be produced. The preparation of the data follows these steps and is identical for variables of different dimensions
