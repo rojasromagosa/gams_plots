@@ -6,7 +6,7 @@ This repository contains R code for creating charts using GAMS simulations data.
 
 # Data preparation
 1. The selection of variables to read in is done via an Excel file. Additional info can be found in the readme of the Excel file. For each variable, it is necessary to specify which charts are to be produced. The preparation of the data follows these steps and is identical for variables of different dimensions
-* Fill in default values in the Excel file when not options are not speficied
+* Fill in default values in the Excel file when options are not speficied
 * Call the *import_data* function for each combination of variable and simulation gdx file
 * Call the *changes_wrt_baseline* function to calculate growth rates, and percentage change wrt baseline. Note that the number of dimensions to pass to **dplyr::group_by** is detected automatically (assumed to be everything except for the column containing the values, and the "t" dimension)
 
