@@ -16,11 +16,13 @@ rm(list = ls())
 try(setwd("~/Dropbox/Valentino/Projects/WB_plots") , silent = T)
 try(setwd("C:/Users/valdes/Dropbox/Valentino/Projects/WB_plots") , silent = T)
 try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots") , silent = T)
-try(setwd("somewhere/Hugo/Github/plots/fixme") , silent = T)
+#try(setwd("somewhere/Hugo/Github/plots/fixme") , silent = T)
+try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
 
 #' This is the path to the folder where all plots are located
 #' (this location will be searched recursively)
-charts_path <- file.path(getwd(), "charts/Manage")
+#charts_path <- file.path(getwd(), "charts/Manage")
+charts_path <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Dependencies ----
@@ -44,6 +46,7 @@ input_latex_template <- "Rcode_Valentino/latex/latex_test/template_v00.tex"
 # output latex file
 output_latex_file <- "Rcode_Valentino/latex/latex_test/charts_v01.tex"
 
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Variables list ----
 
@@ -59,6 +62,8 @@ d_var %<>%
 
 #' This is an empty latex file
 d <- read.delim(input_latex_template, header = F)
+=======
+
 
 
 # test writing file
@@ -166,6 +171,7 @@ d_out <- data.frame(
 # save file
 write.table(d_out,
             file = output_latex_file,
+=======
             sep = "\t", 
             quote = F,
             col.names = F,

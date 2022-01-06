@@ -111,7 +111,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
              scale_y_continuous(n.breaks = 8) +
              theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
              labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
-                  subtitle = paste0(x, ", % growth rate in baseline" ),
+                  #subtitle = paste0(x, ", % growth rate in baseline" ),
                   x = NULL,
                   y = "% growth in baseline") + 
              gg_theme
