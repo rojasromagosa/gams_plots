@@ -1,7 +1,8 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Description ----
 
-#' This file
+#' This file does a recursive chart file (.pdf) search in a given directory, and subsequently creates a latex file including 
+#' all of the charts, grouped by variable.
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Setup ----
@@ -34,21 +35,35 @@ lapply(packages, library, character.only = TRUE)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Set necessary paths ----
+
+# Corresponding Excel file (actually not really necessary, we use it just for the variable labels, maybe drop in future versions)
+input_excel <- file.path("Rcode_Valentino/input_variables_list/Manage_input_variables_list_v01.xlsx")
+
+# this is the latex template to which the charts are added
+input_latex_template <- "Rcode_Valentino/latex/latex_test/template_v00.tex"
+
+# output latex file
+output_latex_file <- "Rcode_Valentino/latex/latex_test/charts_v01.tex"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Variables list ----
-
-#' We need the list of variables only for the variables labels?
-
-input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx")
 
 d_var <- bind_rows(read_excel(input_excel,  sheet = "2dim"), 
                    read_excel(input_excel,  sheet = "3dim"))
 
+d_var %<>%
+  select(variable_name, variable_label) %>% 
+  na.omit
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Read in template ----
 
 #' This is an empty latex file
-d <- read.delim("C:/Users/wb388321/Documents/GitHub/gams_plots/latex/latex_test/template_v00.tex", header = F)
+d <- read.delim(input_latex_template, header = F)
+=======
+
 
 
 # test writing file
@@ -62,16 +77,16 @@ d <- read.delim("C:/Users/wb388321/Documents/GitHub/gams_plots/latex/latex_test/
 ## latex charts ----
 
 #' Get a list of all charts included in the folder, looking in subdirectories
-files <- list.files(charts_path, recursive = T, full.names = T)
+files <- list.files(charts_path, recursive = T, full.names = T, pattern = "\\.pdf$")
 
 #' Now get a list with the names of all the variables
 #' We could either look at the names in the files, or by the name of the folders
 #' For now used the list from above
 variables <- files %>% 
-                gsub(".*\\/[A-Z]+_", "", .) %>%
-                str_extract(., "^[a-zA-Z]+") %>% 
-                unique %>%
-                .[! . %in% "group"]
+  gsub(".*\\/[A-Z]+_", "", .) %>%
+  str_extract(., "^[a-zA-Z]+") %>% 
+  unique %>%
+  .[! . %in% "group"]
 
 
 #' For each of the variables we want to add a latex section, and for each of the plots
@@ -155,7 +170,8 @@ d_out <- data.frame(
 
 # save file
 write.table(d_out,
-            file = "C:/Users/wb388321/Documents/GitHub/gams_plots/latex/latex_test/charts_v00.tex",
+            file = output_latex_file,
+=======
             sep = "\t", 
             quote = F,
             col.names = F,

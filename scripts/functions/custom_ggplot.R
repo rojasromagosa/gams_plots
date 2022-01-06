@@ -57,8 +57,8 @@ my_themeNoTtl <-   theme(text=element_text(size=11), #default text size
                    panel.background = element_rect(fill = NA), # fill in background 
                    panel.grid.major.y = element_line(colour = "grey90"), # color of grid
                    axis.line = element_line(),  # add axis lines
-                   plot.title = NULL, #element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
-                   plot.subtitle = NULL, #element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+                   plot.title = element_blank(), #element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+                   plot.subtitle = element_blank(), #element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
                    axis.title.x = element_text(size = rel(1)),
                    axis.title.y = element_text(size = rel(1)),
                    axis.text.x = element_text(size = rel(1)),
