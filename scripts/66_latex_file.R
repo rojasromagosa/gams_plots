@@ -21,7 +21,7 @@ try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Dependencies ----
-packages <- c("magrittr", "readxl")
+packages <- c("magrittr", "readxl", "dplyr", "stringr")
 to.install <- setdiff(packages, rownames(installed.packages()))
 if (length(to.install) > 0) {
   install.packages(to.install)
