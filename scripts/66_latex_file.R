@@ -19,10 +19,14 @@ try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots") , silent = T)
 #try(setwd("somewhere/Hugo/Github/plots/fixme") , silent = T)
 try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
 
+<<<<<<< Updated upstream
 #' This is the path to the folder where all plots are located
 #' (this location will be searched recursively)
 #charts_path <- file.path(getwd(), "charts/Manage")
 charts_path <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
+=======
+
+>>>>>>> Stashed changes
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Dependencies ----
@@ -36,6 +40,7 @@ lapply(packages, library, character.only = TRUE)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Set necessary paths ----
+<<<<<<< Updated upstream
 
 # Corresponding Excel file (actually not really necessary, we use it just for the variable labels, maybe drop in future versions)
 input_excel <- file.path("Rcode_Valentino/input_variables_list/Manage_input_variables_list_v01.xlsx")
@@ -47,6 +52,22 @@ input_latex_template <- "Rcode_Valentino/latex/latex_test/template_v00.tex"
 output_latex_file <- "Rcode_Valentino/latex/latex_test/charts_v01.tex"
 
 
+=======
+
+# Corresponding Excel file (actually not really necessary, we use it just for the variable labels, maybe drop in future versions)
+input_excel <- file.path("Rcode_Valentino/input_variables_list/Manage_input_variables_list_v01.xlsx")
+
+#' This is the path to the folder where all plots are located
+#' (this location will be searched recursively)
+search_charts_path <- file.path(getwd(), "Rcode_Valentino/charts/Manage")
+
+# this is the latex template to which the charts are added
+input_latex_template <- "Rcode_Valentino/latex/latex_test/template_v00.tex"
+
+# output latex file
+output_latex_file <- "Rcode_Valentino/latex/latex_test/charts_v01.tex"
+
+>>>>>>> Stashed changes
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Variables list ----
 
@@ -62,8 +83,11 @@ d_var %<>%
 
 #' This is an empty latex file
 d <- read.delim(input_latex_template, header = F)
+<<<<<<< Updated upstream
 =======
 
+=======
+>>>>>>> Stashed changes
 
 
 # test writing file
@@ -77,16 +101,28 @@ d <- read.delim(input_latex_template, header = F)
 ## latex charts ----
 
 #' Get a list of all charts included in the folder, looking in subdirectories
+<<<<<<< Updated upstream
 files <- list.files(charts_path, recursive = T, full.names = T, pattern = "\\.pdf$")
+=======
+files <- list.files(search_charts_path, recursive = T, full.names = T, pattern = "\\.pdf")
+>>>>>>> Stashed changes
 
 #' Now get a list with the names of all the variables
 #' We could either look at the names in the files, or by the name of the folders
 #' For now used the list from above
 variables <- files %>% 
+<<<<<<< Updated upstream
   gsub(".*\\/[A-Z]+_", "", .) %>%
   str_extract(., "^[a-zA-Z]+") %>% 
   unique %>%
   .[! . %in% "group"]
+=======
+  gsub(".*\\/[A-Z]+_", "", .) %>% # get rid of first part of the name (capital letters)
+  gsub("^agg_", "", .) %>% # get rid of agg prefix for variables in which factors were aggregated
+  str_extract(., "^[a-zA-Z]+") %>% # now the first part of the name should be the variable name
+  unique %>%
+  .[! . %in% "group"] # for now exclude "group" charts (eg charts in which there is more than one variable)
+>>>>>>> Stashed changes
 
 
 #' For each of the variables we want to add a latex section, and for each of the plots
@@ -171,7 +207,10 @@ d_out <- data.frame(
 # save file
 write.table(d_out,
             file = output_latex_file,
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
             sep = "\t", 
             quote = F,
             col.names = F,
