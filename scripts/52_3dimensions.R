@@ -210,7 +210,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
              gg_theme +
              if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
 
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 5,
@@ -244,7 +244,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
              gg_theme +
              if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
            
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 5,

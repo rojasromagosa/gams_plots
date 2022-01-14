@@ -74,6 +74,10 @@ source("scripts/functions/year_fix.R") # process and format years in Excel varia
 source("scripts/functions/import_data.R") # used to import one specific variable in one gdx file
 source("scripts/functions/changes_wrt_baseline.R") # computes growth rates, and %changes wrt baseline
 
+# set extension type for exported charts
+# chart_ext <- ".pdf"
+chart_ext <- ".png"
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Load GAMS  ----
 

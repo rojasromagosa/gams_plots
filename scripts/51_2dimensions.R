@@ -116,7 +116,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
                   y = "% growth in baseline") + 
              gg_theme
            
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 5,
@@ -145,7 +145,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
                   y = NULL) + 
              gg_theme
            
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 5,
@@ -177,7 +177,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
                   x = NULL,
                   y = "% growth") 
            
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 6,
@@ -207,7 +207,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
                    x = "",
                    y = "% change w.r.t. baseline") 
             
-            ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+            ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                     units = "in",
                     scale = 0.8,
                     height = 6,
@@ -234,7 +234,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
                   x = NULL,
                   y = "% change w.r.t. baseline") 
            
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
+           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                    units = "in",
                    scale = 0.8,
                    height = 6,
@@ -350,7 +350,7 @@ map( d_2dim$variable_name %>% unique,
 #'                  x = "% change w.r.t. baseline",
 #'                  y = "") + 
 #'             my_theme2 
-#'           ggsave( file.path(chart_dir, folder_name, paste0(x,  "_group", group_nb ,"_allsim_", tt, ".pdf") ))
+#'           ggsave( file.path(chart_dir, folder_name, paste0(x,  "_group", group_nb ,"_allsim_", tt, chart_ext) ))
 #'         }
 #'   )
 #'   
@@ -375,7 +375,7 @@ map( d_2dim$variable_name %>% unique,
 #'                  x = "% change w.r.t. baseline",
 #'                  y = "") + 
 #'             my_theme2 
-#'           ggsave( file.path(chart_dir, folder_name, paste0( x, "_group", group_nb ,"_", s, ".pdf") ))
+#'           ggsave( file.path(chart_dir, folder_name, paste0( x, "_group", group_nb ,"_", s, chart_ext) ))
 #'         }
 #'   )
 #' }
