@@ -36,7 +36,8 @@ xaxis <- theme(axis.title.y=element_text(size= 12,angle=90), margin = margin(t=0
 
 
 #' Instead of defining the size of each element, we can also specify the size relative to the default size
-my_theme3 <- theme(text=element_text(size=11), #default text size
+my_theme3 <- list(
+              theme(text=element_text(size=11), #default text size
                    panel.border = element_blank(), # delete panel border
                    panel.background = element_rect(fill = NA), # fill in background 
                    panel.grid.major = element_line(colour = "grey90"), # color of grid
@@ -48,8 +49,10 @@ my_theme3 <- theme(text=element_text(size=11), #default text size
                    axis.text.x = element_text(size = rel(1)),
                    axis.text.y = element_text(size = rel(1)),
                    legend.text = element_text(size = rel(1)),
-                   legend.title = element_text(size = rel(1.1))
+                   legend.title = element_text(size = rel(1.1))),
+              scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black") )
 )
+              
 
 
 my_themeNoTtl <-   theme(text=element_text(size=11), #default text size

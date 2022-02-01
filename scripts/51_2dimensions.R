@@ -70,179 +70,6 @@ map(d$var %>% unique,
     }
 )
 
-#' Define a function that, for a given variable, will process all the rows 
-#' in the Excel input file. For each row, it checks which chart to create
-all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
-  # ~~~~~~~~~~~~
-  # debug start:
-  # ~~~~~~~~~~~~
-  # chart_type = "bau_%g_line"
-  # chart_type = "all_%g_line"
-  # chart_type = "bau_level_line"
-  # chart_type = "sim_%bau_line" 
-  # chart_type = "sim_%bau_bar" 
-  # year_span = 2020:2035
-  # year_span = c(2025, 2030, 2040)
-  # themev = "my_theme3"
-  # export_chart_data = 1
-  # ~~~~~~~~~~~
-  # debug end
-  # ~~~~~~~~~~~
-  
-  # use the selected theme
-  gg_theme <- get(theme)
-  
-  if (chart_type=="bau_%g_line"){
-    
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # baseline: line graph with growth rates
-    map( d_tmp$r %>% unique,
-         function(x){
-           # debug: x="USA"
-           d_chart <- d_tmp %>%
-             filter(r == x,
-                    sim == "BaU",
-                    t != min(t),
-                    t %in% year_span)
-           
-           ggplot(d_chart, aes(x=t, y=value_g)) +
-             geom_line(size=0.8, color= "blue") +
-             scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
-             scale_y_continuous(n.breaks = 8) +
-             theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
-             labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
-                  #subtitle = paste0(x, ", % growth rate in baseline" ),
-                  x = NULL,
-                  y = "% growth in baseline") + 
-             gg_theme
-           
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 5,
-                   width = 8* (length(unique(d_chart$t))/16)^0.2  )
-         }
-    )
-  } else if (chart_type=="bau_level_line"){
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # baseline: line graph with baseline levels
-    map( d_tmp$r %>% unique,
-         function(x){
-           # debug: x="USA"
-           d_chart <- d_tmp %>%
-             filter(r == x,
-                    sim == "BaU",
-                    t %in% year_span)
-           
-           ggplot(d_chart, aes(x=t, y=value)) +
-             geom_line(size=0.8, color= "blue") +
-             scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
-             scale_y_continuous(n.breaks = 8) +
-             theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
-             labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
-                  subtitle = paste0(x, ", baseline level" ),
-                  x = NULL,
-                  y = NULL) + 
-             gg_theme
-           
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 5,
-                   width = 8* (length(unique(d_chart$t))/16)^0.2  )
-         }
-    )
-    
-  } else if (chart_type=="all_%g_line"){
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # bau + simulations: line graph with growth rates
-    map( d_tmp$r %>% unique,
-         function(x){
-           # debug: x="USA"
-           d_chart <- d_tmp %>%
-             filter(r == x,
-                    t != min(t),
-                    t %in% year_span)
-           
-           ggplot(d_chart, aes(x=t, y=value_g, color=sim)) +
-             geom_line(size=0.8) +
-             scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
-             scale_y_continuous(n.breaks = 8) +
-             gg_theme +
-             theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
-                   legend.position="top",
-                   legend.title=element_blank()) +
-             labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
-                  subtitle = paste0(x, ", % growth rate" ),
-                  x = NULL,
-                  y = "% growth") 
-           
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 6,
-                   width = 8* (length(unique(d_chart$t))/16)^0.2  )
-         }
-    )
-    
-  } else if (chart_type=="sim_%bau_line"){
-    map(  d$r %>% unique,
-          function(x){
-            # debug: x="CHN"
-            d_chart <- d_tmp %>%
-              filter(r == x,
-                     sim != "BaU",
-                     t %in% year_span)
-            
-            ggplot(d_chart, aes(x=t, y=change, colour=sim)) +
-              geom_line(size=2) + 
-              scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
-              scale_y_continuous(n.breaks = 8) +
-              gg_theme + 
-              theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
-                    legend.position="top",
-                    legend.title=element_blank()) +
-              labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
-                   subtitle = paste0(x, ", % change w.r.t. baseline" ),
-                   x = "",
-                   y = "% change w.r.t. baseline") 
-            
-            ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
-                    units = "in",
-                    scale = 0.8,
-                    height = 6,
-                    width = 8* (length(unique(d_chart$t))/16)^0.2  )          }
-    )
-    
-  } else if (chart_type=="sim_%bau_bar"){
-    map( d$r %>% unique,
-         function(x){
-           # debug: x="CHN"
-           d_chart <- d_tmp %>% filter( r == x,
-                                        sim != "BaU",
-                                        t %in% year_span )
-           
-           
-           ggplot(d_chart, aes(x=factor(t), y=change, fill=sim)) +
-             geom_col(position=position_dodge()) +
-             scale_y_continuous(n.breaks = 8) +
-             gg_theme + 
-             theme(legend.position="top",
-                   legend.title=element_blank()) +
-             labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
-                  subtitle = paste0(x, ", % change w.r.t. baseline" ),
-                  x = NULL,
-                  y = "% change w.r.t. baseline") 
-           
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, ".pdf") ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 6,
-                   width = 8* (length(unique(d_chart$t))/16)^0.2  )          }
-    )
-    
-  }
-}
 
 
 #' Define a function that subsets the whole data for a single variable
@@ -250,7 +77,7 @@ all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name,
 
 plot.var.2dim <- function(var_tmp){
   
-  #debug: var_tmp = "rgdppc"
+  #debug: var_tmp = "rgdpmp"
   d_2dim_tmp <- d_2dim %>% filter(variable_name==var_tmp)
   d_tmp <- d %>% filter(var==var_tmp)
   
@@ -261,6 +88,220 @@ plot.var.2dim <- function(var_tmp){
               file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, ".csv") ),
               row.names = F)
   }
+  
+  #' Create Workbook where all plots for this variable will be saved
+  wb <- openxlsx::createWorkbook()
+  
+  #' Define a function that, for a given variable, will process all the rows 
+  #' in the Excel input file. For each row, it checks which chart to create
+  #' var_tmp and d_tmp are passed in from the function below
+  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
+    # ~~~~~~~~~~~~
+    # debug start:
+    # ~~~~~~~~~~~~
+    # chart_type = "bau_%g_line"
+    # chart_type = "all_%g_line"
+    # chart_type = "bau_level_line"
+    # chart_type = "sim_%bau_line" 
+    # chart_type = "sim_%bau_bar" 
+    # year_span = 2020:2035
+    # year_span = c(2025, 2030, 2040)
+    # theme = "my_theme3"
+    # export_chart_data = 1
+    # chart_name = "test"
+    # ~~~~~~~~~~~
+    # debug end
+    # ~~~~~~~~~~~
+    
+    # we need to look into the parents environment for the chart extension
+    # the alternative would be to pass it in as an argument? Note <<- is the superassignment operator
+    chart_ext <<- chart_ext
+    
+    # a function that adds a sheet to the workbook that is created
+    custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
+      tmp_wb <<- wb
+      openxlsx::addWorksheet(tmp_wb,
+                             sheetName = s_name)
+      openxlsx::writeData(tmp_wb,
+                          sheet = s_name,
+                          d)
+    }
+    
+    # use the selected theme
+    gg_theme <- get(theme)
+    
+    if (chart_type=="bau_%g_line"){
+      
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # baseline: line graph with growth rates
+      map( d_tmp$r %>% unique,
+           function(x){
+             # debug: x="USA"
+             d_chart <- d_tmp %>%
+               filter(r == x,
+                      sim == "BaU",
+                      t != min(t),
+                      t %in% year_span)
+             
+             ggplot(d_chart, aes(x=t, y=value_g)) +
+               geom_line(size=0.8, color= "blue") +
+               scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
+               scale_y_continuous(n.breaks = 8) +
+               theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
+               labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
+                    #subtitle = paste0(x, ", % growth rate in baseline" ),
+                    x = NULL,
+                    y = "% growth in baseline") + 
+               gg_theme
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 5,
+                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  
+             )
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
+             
+           }
+      )
+    } else if (chart_type=="bau_level_line"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # baseline: line graph with baseline levels
+      map( d_tmp$r %>% unique,
+           function(x){
+             # debug: x="USA"
+             d_chart <- d_tmp %>%
+               filter(r == x,
+                      sim == "BaU",
+                      t %in% year_span)
+             
+             ggplot(d_chart, aes(x=t, y=value)) +
+               geom_line(size=0.8, color= "blue") +
+               scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
+               scale_y_continuous(n.breaks = 8) +
+               theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
+               labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
+                    subtitle = paste0(x, ", baseline level" ),
+                    x = NULL,
+                    y = NULL) + 
+               gg_theme
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 5,
+                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
+           }
+      )
+      
+    } else if (chart_type=="all_%g_line"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # bau + simulations: line graph with growth rates
+      map( d_tmp$r %>% unique,
+           function(x){
+             # debug: x="USA"
+             d_chart <- d_tmp %>%
+               filter(r == x,
+                      t != min(t),
+                      t %in% year_span)
+             
+             ggplot(d_chart, aes(x=t, y=value_g, color=sim)) +
+               geom_line(size=0.8) +
+               scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
+               scale_y_continuous(n.breaks = 8) +
+               gg_theme +
+               theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
+                     legend.position="top",
+                     legend.title=element_blank()) +
+               labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
+                    subtitle = paste0(x, ", % growth rate" ),
+                    x = NULL,
+                    y = "% growth") 
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 6,
+                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
+           }
+      )
+      
+    } else if (chart_type=="sim_%bau_line"){
+      map(  d$r %>% unique,
+            function(x){
+              # debug: x="CHN"
+              d_chart <- d_tmp %>%
+                filter(r == x,
+                       sim != "BaU",
+                       t %in% year_span)
+              
+              ggplot(d_chart, aes(x=t, y=change, colour=sim)) +
+                geom_line(size=2) + 
+                scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
+                scale_y_continuous(n.breaks = 8) +
+                gg_theme + 
+                theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
+                      legend.position="top",
+                      legend.title=element_blank()) +
+                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
+                     subtitle = paste0(x, ", % change w.r.t. baseline" ),
+                     x = "",
+                     y = "% change w.r.t. baseline") 
+              
+              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                      units = "in",
+                      scale = 0.8,
+                      height = 6,
+                      width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
+              
+              # add data to the Excel file
+              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
+          }
+      )
+      
+    } else if (chart_type=="sim_%bau_bar"){
+      map( d$r %>% unique,
+           function(x){
+             # debug: x="CHN"
+             d_chart <- d_tmp %>% filter( r == x,
+                                          sim != "BaU",
+                                          t %in% year_span )
+             
+             
+             ggplot(d_chart, aes(x=factor(t), y=change, fill=sim)) +
+               geom_col(position=position_dodge()) +
+               scale_y_continuous(n.breaks = 8) +
+               gg_theme + 
+               theme(legend.position="top",
+                     legend.title=element_blank()) +
+               labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
+                    subtitle = paste0(x, ", % change w.r.t. baseline" ),
+                    x = NULL,
+                    y = "% change w.r.t. baseline") 
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 6,
+                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  ) 
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name) )}
+             
+             }
+      )
+      
+    }
+  }
+
   
   # now apply the chart function
   pmap(list(
@@ -274,13 +315,25 @@ plot.var.2dim <- function(var_tmp){
     d_tmp=d_tmp, # pass in data
     var_tmp=var_tmp # pass in the variable name
   )
+
   
+  #' Finally close and save the Excel file containing all the charts data for
+  #' a given variable
+  #' Note: we do this only if the workbook contains at least one sheet
+  if(length(openxlsx::sheets(wb))>0){
+    openxlsx::saveWorkbook(wb,
+                           file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
+                           overwrite = TRUE)  
+    }
+ 
   
 }
 
 
+#' Apply the function to all variables:
 map( d_2dim$variable_name %>% unique,
      plot.var.2dim)
+
 
 
 
@@ -350,7 +403,7 @@ map( d_2dim$variable_name %>% unique,
 #'                  x = "% change w.r.t. baseline",
 #'                  y = "") + 
 #'             my_theme2 
-#'           ggsave( file.path(chart_dir, folder_name, paste0(x,  "_group", group_nb ,"_allsim_", tt, ".pdf") ))
+#'           ggsave( file.path(chart_dir, folder_name, paste0(x,  "_group", group_nb ,"_allsim_", tt, chart_ext) ))
 #'         }
 #'   )
 #'   
@@ -375,7 +428,7 @@ map( d_2dim$variable_name %>% unique,
 #'                  x = "% change w.r.t. baseline",
 #'                  y = "") + 
 #'             my_theme2 
-#'           ggsave( file.path(chart_dir, folder_name, paste0( x, "_group", group_nb ,"_", s, ".pdf") ))
+#'           ggsave( file.path(chart_dir, folder_name, paste0( x, "_group", group_nb ,"_", s, chart_ext) ))
 #'         }
 #'   )
 #' }

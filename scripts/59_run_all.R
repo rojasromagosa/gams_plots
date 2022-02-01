@@ -17,30 +17,35 @@ try(setwd("C:/Users/valdes/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino")
 try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
 #try(setwd("C:/Users/wb388321/OneDrive - WBG/Projects/STC_Valentino/Rcode_Valentino") , silent = T)
 try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
+try(setwd("C:/Users/desil/Documents/GitHub/gams_plots") , silent = T)
 
 
 #' Set the name of folder where the gdx files are located
 #input_dir <- file.path(getwd(), "input_data/Manage")
+#input_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Envisage')
+input_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Manage')
 #input_dir <- file.path(getwd(), "input_data/Envisage")
-input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/res")
+#input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/res")
+
 
 #' directory where to save all plots (the folder needs to exist already)
 #chart_dir <- file.path(getwd(), "charts/Manage")
-#chart_dir <- file.path(getwd(), "charts/Envisage")
-chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
+#chart_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Envisage')
+chart_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Manage')
+#chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
 
 #' GAMS directory
-#gams_dir <- "C:/GAMS/36"
-gams_dir <- "C:/Program Files/GAMS36"
+gams_dir <- "C:/GAMS/36"
+#gams_dir <- "C:/Program Files/GAMS36"
 
 #' names of files to be imported (there is one file for each simulation)
 # input_files <- c("BaU.gdx", "Sim1_RenW.gdx", "Sim2_RenAlt.gdx") # use a list of files
-input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of files with a gdx extension
+input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of files with a .gdx extension
 
 #' name of the Excel file containing the list of variables
 #input_excel <- file.path( getwd(),
-input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx"
-                          #"input_variables_list/Envisage_input_variables_list_v02.xlsx"
+input_excel <- file.path(#"C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx"
+                          "input_variables_list/Manage_input_variables_list_IDN_v00.xlsx"
                           )
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,6 +78,11 @@ source("scripts/functions/custom_ggplot.R") # plot themes
 source("scripts/functions/year_fix.R") # process and format years in Excel variable file
 source("scripts/functions/import_data.R") # used to import one specific variable in one gdx file
 source("scripts/functions/changes_wrt_baseline.R") # computes growth rates, and %changes wrt baseline
+
+# set extension type for exported charts
+# this is accessed with the superassignment operator <<- in the function that produces the charts
+# chart_ext <- ".pdf"
+chart_ext <- ".png"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Load GAMS  ----
@@ -176,17 +186,7 @@ if("mapaga" %in% d_meta$name){
                      var_aggr = isrep)
 }
 
-#' work in progress stuff
-#' There is no aggregation in mapis for Manage?
-# d_mapis <- rgdx( file.path(input_dir, input_files[1]),
-#                  list(name = "mapis", form = "full"))$val %>%
-#   as_tibble(rownames = "is0") %>%
-#   melt(id="is0", variable.name="is") %>%
-#   filter(value !=0) %>% # remove non relevant
-#   #filter(is0!=a) %>% # remove same aggregation
-#   select(-value)
-# unique(d_mapis$is0) %>% length
-# unique(d_mapis$is) %>% length
+
 
 ## 2) Years for reporting
 
@@ -206,7 +206,9 @@ years_5 <- seq(min(years_all), max(years_all), 5)
 d_meta %>% filter(nb_dimensions==2) %>% count(domnames_v)
 
 #' The list of variables to be plotted from the Excel file
-d_2dim  <- read_excel(input_excel,  sheet = "2dim")
+d_2dim  <- read_excel(input_excel,
+                      sheet = "2dim",
+                      col_types = c("text","text","text","numeric","numeric","text","text","text","numeric"))
 source("scripts/51_2dimensions.R")
 
 
@@ -230,9 +232,36 @@ d_meta %>%
 
 
 #' The list of variables to be plotted from the Excel file
-d_3dim  <- read_excel(input_excel,  sheet = "3dim")
+d_3dim  <- read_excel(input_excel,
+                      sheet = "3dim",
+                      col_types = c("text","text","text","numeric","numeric","text","text","text","numeric"))
 source("scripts/52_3dimensions.R")
 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 4 dim variables  ----
+
+#' Explore variables having 3 dimensions (2 + r)
+d_meta %>% filter(nb_dimensions==4) %>% count(domnames_v)
+
+#' The list of variables to be plotted from the Excel file
+d_4dim  <- read_excel(input_excel,
+                      sheet = "4dim",
+                      col_types = c("text","text","text","numeric","numeric","text","text","text","text","numeric"))
+source("scripts/53_4dimensions.R")
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 4 dim variables  ----
+
+#' Explore variables having 4+ dimensions (3 + r)
+d_meta %>% filter(nb_dimensions>=5) %>% count(domnames_v)
+
+#' The list of variables to be plotted from the Excel file
+d_5dim  <- read_excel(input_excel,
+                      sheet = "5+dim",
+                      col_types = c("text","text"))
+source("scripts/54_5+dimensions.R")
 
 
 
