@@ -47,10 +47,12 @@ d_3dim <- merge(
 #' This process can be in theory expanded to have different levels of aggregation, or for different variables
 d_3dim <- bind_rows(
   # list of variables
-  d_3dim,  # list of variables with "new" dimension
-  d_3dim %>% 
-    filter(domnames_v=="a-t") %>% 
-    mutate(domnames_v="aga-t")
+  d_3dim  %>% 
+    mutate( aggr = ""),  # list of variables with "new" 
+  d_3dim %>%
+    filter( str_detect(domnames_v, "-a-|^a-|-a$") ) %>%
+    mutate(domnames_v = gsub("^a|a$|(?<=-)a(?=-)", "aga", domnames_v, perl = T))  %>%  # substitute a with aga, keeping track of different possible positions of a
+    mutate( aggr = "_aggr")
 )
 
 #' For a given variable, if we have the same plot with different years or styles, we need to create different names
@@ -81,9 +83,10 @@ dir.create(file.path(chart_dir, folder_name), showWarnings = F)
 
 
 #' Data frame with variables to read in
-#' Note that we need to read in some variables twice, if the third dimension can be aggregated 
+#' Note that we need to read in some variables twice, if the third dimension can be aggregated
+#' (we do this to keep things simple, instead of adding data later) 
 d_3dim_v <- d_3dim %>% 
-              select(variable_name, variable_label, rescale, compute_shares, export_var_data, domnames_v) %>%
+              select(variable_name, variable_label, rescale, compute_shares, export_var_data, domnames_v, aggr) %>%
               unique()
 
 
@@ -99,6 +102,7 @@ read_in_all_data <- function(var_name,
   # var_rescale <- NA
   # compute_shares <- 1
   # var_dimensions <- "aga-t"
+  # var_dimensions <- "a-t"
   # debug end
   # ~~~~~~~~~~~~
   
@@ -125,7 +129,8 @@ read_in_all_data <- function(var_name,
   if(var_dimensions=="aga-t"){
   d %<>%
     mutate( var3 = d_agg$var_aggr[match(var3, d_agg$var)]) %>% 
-    group_by(r,t,var,sim, var3) %>% 
+    #group_by(r,t,var,sim, var3) %>%   # everything but value?
+    group_by(across(c(-value))) %>%  
     summarise( value = sum(value)) %>% 
     ungroup()
   }
@@ -162,106 +167,11 @@ d <- pmap_dfr(list(
 # Make charts  ----
 
 
-#' Define a function that, for a given variable, will process all the rows 
-#' in the Excel input file. For each row, it checks which chart to create
-all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
-  # ~~~~~~~~~~~~
-  # debug start:
-  # ~~~~~~~~~~~~
-  # chart_type = "bau_level_bar"
-  # chart_type = "sim_%bau_bar"
-  # year_span = 2020
-  # year_span = c(2025, 2030)
-  # theme = "my_theme3"
-  # export_chart_data = 1
-  # chart_name = "test_chart"
-  # ~~~~~~~~~~~
-  # debug end
-  # ~~~~~~~~~~~
-  
-  # use the selected theme
-  gg_theme <- get(theme)
-  
-  if (chart_type=="bau_level_bar"){
-    
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # baseline: bar chart with all levels on x dimension, one bar for each year
-    map( d_tmp$r %>% unique,
-         function(x){
-           # debug: x="USA"
-           d_chart <- d_tmp %>%
-             filter(r == x,
-                    sim == "BaU",
-                    t %in% year_span)
-           
-           compute_shares <- d_chart$compute_shares[1]
-           uni_factors <- d_chart$var3 %>% unique %>% length
-           
-           ggplot(d_chart, aes(x=var3, y=value, fill=factor(t))) +
-             geom_col(position = position_dodge()) +
-             scale_y_continuous(n.breaks = 8) +
-             theme(legend.position="top",
-                   legend.title=element_blank()) +
-             labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
-                  subtitle = paste0(x, ", Baseline" ),
-                  x = NULL,
-                  y = ifelse(compute_shares==T, "% of total", "Baseline value" ), 
-                  fill = NULL) +
-             gg_theme +
-             if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
-
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 5,
-                   width = 8* (uni_factors/4)^0.2  )
-         }
-    )
-  } else if (chart_type=="sim_%bau_bar"){
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # simulation: for a given year, show the changes wrt baseline, for each level
-    map( d_tmp$r %>% unique,
-         function(x){
-           # debug: x="USA"
-           d_chart <- d_tmp %>%
-             filter(r == x,
-                    sim != "BaU",
-                    t %in% year_span)
-           
-           compute_shares <- d_chart$compute_shares[1]
-           uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
-           
-           ggplot(d_chart, aes(x=var3, y=change, fill=sim)) +
-             geom_col(position = position_dodge()) +
-             scale_y_continuous(n.breaks = 8) +
-             theme(legend.position="top",
-                   legend.title=element_blank()) +
-             labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
-                  subtitle = paste0(x, ", Simulations" ),
-                  x = NULL,
-                  y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
-                  fill = NULL) +
-             gg_theme +
-             if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
-           
-           ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                   units = "in",
-                   scale = 0.8,
-                   height = 5,
-                   width = 8* (uni_factors/4)^0.2  )
-         }
-    )
-  }
-}
-
 
 plot.var.3dim <- function(var_tmp, dimension){
 
   #debug: var_tmp = "xp"
-  #debug: dimension = "a-t"
-  
-  # create a folder where to store the plots 
-  dir.create(file.path(chart_dir, folder_name, var_tmp), showWarnings = F)
+  #debug: dimension = "aga-t"
   
   # For a specific variable and associated dimension subset the data
   d_3dim_tmp <- d_3dim %>% filter(variable_name==var_tmp,
@@ -269,11 +179,148 @@ plot.var.3dim <- function(var_tmp, dimension){
   d_tmp <- d %>% filter(var==var_tmp,
                         domnames_v==dimension)
   
-  # save data if required
+  #' From here on var_tmp is used only to create the right paths
+  #' We update it 
+  var_tmp <- paste0(var_tmp,
+                    d_3dim_v %>%
+                      filter(variable_name==var_tmp,
+                             domnames_v==dimension) %>% 
+                      pull(aggr)
+  )
+  
+  # create a folder where to store the plots 
+  dir.create(file.path(chart_dir, folder_name, var_tmp), showWarnings = F)
+  
+  #' save data if required
+  #' How not to write over when processing the aggregated variables?
   if(d_3dim_tmp$export_var_data[1]==1){
     write.csv(d_tmp,
               file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, ".csv") ),
               row.names = F)
+  }
+  
+  #' Create Workbook where all plots for this variable will be saved
+  wb <- openxlsx::createWorkbook()
+  
+  #' Define a function that, for a given variable, will process all the rows 
+  #' in the Excel input file. For each row, it checks which chart to create
+  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
+    # ~~~~~~~~~~~~
+    # debug start:
+    # ~~~~~~~~~~~~
+    # chart_type = "bau_level_bar"
+    # chart_type = "sim_%bau_bar"
+    # year_span = 2020
+    # year_span = c(2025, 2030)
+    # theme = "my_theme3"
+    # export_chart_data = 1
+    # chart_name = "test_chart"
+    # ~~~~~~~~~~~
+    # debug end
+    # ~~~~~~~~~~~
+    
+    # we need to look into the parents environment for the chart extension
+    # the alternative would be to pass it in as an argument? Note <<- is the superassignment operator
+    chart_ext <<- chart_ext
+    
+    # a function that adds a sheet to the workbook that is created
+    custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
+      tmp_wb <<- wb
+      openxlsx::addWorksheet(tmp_wb,
+                             sheetName = s_name)
+      openxlsx::writeData(tmp_wb,
+                          sheet = s_name,
+                          d)
+    }
+    
+    # use the selected theme
+    gg_theme <- get(theme)
+    
+    if (chart_type=="bau_level_bar"){
+      
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # baseline: bar chart with all levels on x dimension, one bar for each year
+      map( d_tmp$r %>% unique,
+           function(x){
+             # debug: x="USA"
+             d_chart <- d_tmp %>%
+               filter(r == x,
+                      sim == "BaU",
+                      t %in% year_span)
+             
+             compute_shares <- d_chart$compute_shares[1]
+             uni_factors <- d_chart$var3 %>% unique %>% length
+             
+             ggplot(d_chart, aes(x=var3, y=value, fill=factor(t))) +
+               geom_col(position = position_dodge()) +
+               scale_y_continuous(n.breaks = 8) +
+               theme(legend.position="top",
+                     legend.title=element_blank()) +
+               labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
+                    subtitle = paste0(x, ", Baseline" ),
+                    x = NULL,
+                    y = ifelse(compute_shares==T, "% of total", "Baseline value" ), 
+                    fill = NULL) +
+               gg_theme +
+               if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 5,
+                     width = 0.01 + 8* (uni_factors/4)^0.2  )
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
+           }
+      )
+    } else if (chart_type=="sim_%bau_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulation: for a given year, show the changes wrt baseline, for each level
+      map( d_tmp$r %>% unique,
+           function(x){
+             # debug: x="USA"
+             d_chart <- d_tmp %>%
+               filter(r == x,
+                      sim != "BaU",
+                      t %in% year_span)
+             
+             compute_shares <- d_chart$compute_shares[1]
+             uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
+             
+             ggplot(d_chart, aes(x=var3, y=change, fill=sim)) +
+               geom_col(position = position_dodge()) +
+               scale_y_continuous(n.breaks = 8) +
+               theme(legend.position="top",
+                     legend.title=element_blank()) +
+               labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
+                    subtitle = paste0(x, ", Simulations" ),
+                    x = NULL,
+                    y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
+                    fill = NULL) +
+               gg_theme +
+               if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
+             
+             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                     units = "in",
+                     scale = 0.8,
+                     height = 5,
+                     width = 0.01 + 8* (uni_factors/4)^0.2  )
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
+           }
+      )
+    }
+    
+    #' Finally close and save the Excel file containing all the charts data for
+    #' a given variable
+    #' Note: we do this only if the workbook contains at least one sheet
+    if(length(openxlsx::sheets(wb))>0){
+    openxlsx::saveWorkbook(wb,
+                           file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
+                           overwrite = TRUE) 
+    }
   }
 
 
@@ -296,7 +343,8 @@ plot.var.3dim <- function(var_tmp, dimension){
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # plot all variables  ----
 
-#' now we can run the function for all of the variables in the list
+#' now we can run the function for all of the 
+#' variable X dimension pairs
 map2( d_3dim_v$variable_name,
       d_3dim_v$domnames_v,
      plot.var.3dim)
