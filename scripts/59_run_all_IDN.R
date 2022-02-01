@@ -22,12 +22,12 @@ try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
 #' Set the name of folder where the gdx files are located
 #input_dir <- file.path(getwd(), "input_data/Manage")
 #input_dir <- file.path(getwd(), "input_data/Envisage")
-input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN_JW_jan2022/res")
+input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/res")
 
 #' directory where to save all plots (the folder needs to exist already)
 #chart_dir <- file.path(getwd(), "charts/Manage")
 #chart_dir <- file.path(getwd(), "charts/Envisage")
-chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN_JW_jan2022/charts")
+chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/charts")
 
 #' GAMS directory
 #gams_dir <- "C:/GAMS/36"
@@ -39,7 +39,7 @@ input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of
 
 #' name of the Excel file containing the list of variables
 #input_excel <- file.path( getwd(),
-input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN_JW_jan2022/charts/Manage_input_variables_list_v02.xlsx"
+input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/charts/Manage_input_variables_list_v02.xlsx"
                           #"input_variables_list/Envisage_input_variables_list_v02.xlsx"
                           )
 
