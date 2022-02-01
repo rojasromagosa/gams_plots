@@ -1,0 +1,107 @@
+---
+title: "GAMS chart automatisation"
+output: 
+    powerpoint_presentation:
+      toc: false
+      toc_depth: 1
+      #reference_doc: my-styles.pptx
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Setup ----
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Directories ---- 
+
+rm(list = ls())
+
+# set the wd for all chunks
+#knitr::opts_knit$set(root.dir = "Z:/Dropbox/Valentino/Projects/WB_plots")
+#knitr::opts_knit$set(root.dir = "C:/Users/wb388321/Documents/GitHub/gams_plots")
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Dependencies ----
+packages <- c("magrittr", "readxl", "dplyr", "stringr")
+to.install <- setdiff(packages, rownames(installed.packages()))
+if (length(to.install) > 0) {
+  install.packages(to.install)
+}
+lapply(packages, library, character.only = TRUE)
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Set necessary paths ----
+
+# Corresponding Excel file (actually not really necessary, we use it just for the variable labels, maybe drop in future versions)
+input_excel <- file.path("C:/Users/desil/Documents/GitHub/gams_plots/input_variables_list/Manage_input_variables_list_IDN_v00.xlsx")
+
+#' This is the path to the folder where all plots are located
+#' (it will be searched recursively)
+search_charts_path <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Manage')
+
+
+```
+
+
+```{r, chart names}
+
+d_var <- bind_rows(read_excel(input_excel,  sheet = "2dim"), 
+                   read_excel(input_excel,  sheet = "3dim"),
+                   read_excel(input_excel,  sheet = "4dim"))
+
+d_var %<>%
+  select(variable_name, variable_label) %>% 
+  na.omit
+
+
+#' Get a list of all charts included in the folder, looking in subdirectories
+
+files <- list.files(search_charts_path, recursive = T, full.names = T, pattern = "\\.png$")
+
+
+#' Now get a list with the names of all the variables
+#' We could either look at the names in the files, or by the name of the folders
+#' For now used the list from above
+variables <- files %>% 
+  gsub(".*\\/[A-Z]+_", "", .) %>% # get rid of first part of the name (capital letters)
+  gsub("^agg_", "", .) %>% # get rid of agg prefix for variables in which factors were aggregated
+  str_extract(., "^[a-zA-Z]+") %>% # now the first part of the name should be the variable name
+  unique %>%
+  .[! . %in% "group"] # for now exclude "group" charts (eg charts in which there is more than one variable)
+
+
+
+```
+
+
+
+```{r, results="asis"}
+
+for(i in variables){
+  
+  #debug: i <- variables[1]
+  
+  #cat("\n") 
+  #cat("##", i, "\n") # Create second level headings with the names.
+  cat("#", i, "=", d_var$variable_label[match(i, d_var$variable_name)] )
+  cat("\n", "\n") # two empty spaces mean next line
+  cat("---", "\n", "\n")
+  
+
+  # now print all graphs
+  var_files <- files[ grepl(paste0("_", i ,"_"), files) ]
+  
+  for(j in var_files){
+    #debug: j <- var_files[1]
+    cat( paste0("![My test title](", j, "){width=80%}")) 
+    cat("\n", "\n" )
+  }
+  
+}
+```
+
+
+
