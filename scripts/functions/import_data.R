@@ -12,9 +12,11 @@ import.data <- function(gdx_name, var_name, inScale){
   # debug start: 
   # gdx_name <- input_files[1]
   # var_name <- "rgdpmp"
-  # inScale <- var_rescale
+  # inScale <- "inScale"
   # debug end
   # ~~~~~~~~~~~~
+  
+  # cat(gdx_name, var_name)
   
   #' write a function that reads in the data and matches the dimensions names:
   #' We can use this function to read in the variable, and also to read in variable0
@@ -68,18 +70,21 @@ import.data <- function(gdx_name, var_name, inScale){
       mutate(value = value/scale)
   }
   
+  
   #' need to change year into numeric (it is stored as character in the gdx file)
   d %<>% mutate(t = as.integer(t))
-  
   
   #' add names of gdx and variable
   d %<>% mutate(var=var_name, sim= gsub("\\.gdx", "", gdx_name))
   
   #' MANAGE files have no r dimension. We add it "manually" so that the data can be
   #' processed in the dame way as the ENVISAGE data.
-  #' NOTE: will have to change this and read in a parameter "r" from the gdx file
   if(! "r" %in% names(d)){
-    d %<>% mutate(r="USA")
+    r_manage <- rgdx( file.path(input_dir, input_files[1]), list(name = "r", form = "full"))$val %>%
+                        as_tibble(rownames = "y") %>%
+                        filter(V1==1) %>%
+                        pull(y)
+    d %<>% mutate(r=r_manage)
   }
   
   #' end of processing data
