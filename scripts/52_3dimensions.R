@@ -103,6 +103,12 @@ read_in_all_data <- function(var_name,
   # compute_shares <- 1
   # var_dimensions <- "aga-t"
   # var_dimensions <- "a-t"
+  # 
+  # var_name <- "lsT"
+  # var_label <- "test name"
+  # var_rescale <- "inScale"
+  # compute_shares <- 0
+  # var_dimensions <- "l-t"
   # debug end
   # ~~~~~~~~~~~~
   
@@ -172,6 +178,8 @@ plot.var.3dim <- function(var_tmp, dimension){
 
   #debug: var_tmp = "xp"
   #debug: dimension = "aga-t"
+  #debug: var_tmp = "lsT"
+  #debug: dimension = "l-t"
   
   # For a specific variable and associated dimension subset the data
   d_3dim_tmp <- d_3dim %>% filter(variable_name==var_tmp,
@@ -199,8 +207,7 @@ plot.var.3dim <- function(var_tmp, dimension){
               row.names = F)
   }
   
-  #' Create Workbook where all plots for this variable will be saved
-  wb <- openxlsx::createWorkbook()
+
   
   #' Define a function that, for a given variable, will process all the rows 
   #' in the Excel input file. For each row, it checks which chart to create
@@ -279,16 +286,20 @@ plot.var.3dim <- function(var_tmp, dimension){
       # simulation: for a given year, show the changes wrt baseline, for each level
       map( d_tmp$r %>% unique,
            function(x){
-             # debug: x="USA"
+             # debug: x="IDN"
              d_chart <- d_tmp %>%
                filter(r == x,
                       sim != "BaU",
                       t %in% year_span)
              
-             compute_shares <- d_chart$compute_shares[1]
-             uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
+             # we need to create new labels: yearXsim
+             d_chart %<>% mutate(lab = paste0(t, "\n", sim))
              
-             ggplot(d_chart, aes(x=var3, y=change, fill=sim)) +
+             
+             compute_shares <- d_chart$compute_shares[1]
+             uni_factors <- d_chart$lab %>% unique %>% length # this is probably not enough, if we have many simulations
+             
+             ggplot(d_chart, aes(x=lab, y=change, fill=var3)) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
                theme(legend.position="top",
@@ -316,11 +327,11 @@ plot.var.3dim <- function(var_tmp, dimension){
     #' Finally close and save the Excel file containing all the charts data for
     #' a given variable
     #' Note: we do this only if the workbook contains at least one sheet
-    if(length(openxlsx::sheets(wb))>0){
-    openxlsx::saveWorkbook(wb,
-                           file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
-                           overwrite = TRUE) 
-    }
+    # if(length(openxlsx::sheets(wb))>0){
+    # openxlsx::saveWorkbook(wb,
+    #                        file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
+    #                        overwrite = TRUE) 
+    # }
   }
 
 

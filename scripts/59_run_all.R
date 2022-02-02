@@ -200,6 +200,13 @@ years_all <- rgdx( file.path(input_dir, input_files[1]), list(name = "t", form =
 # years selections
 years_5 <- seq(min(years_all), max(years_all), 5)
 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Excel file  ----
+
+#' Create Workbook where all plots for this variable will be saved
+wb <- openxlsx::createWorkbook()
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 2 dim variables (r-t)  ----
 
@@ -264,9 +271,14 @@ d_5dim  <- read_excel(input_excel,
 source("scripts/54_5+dimensions.R")
 
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Close Excel  ----
 
-
-
+if(length(openxlsx::sheets(wb))>0){
+  openxlsx::saveWorkbook(wb,
+                         file.path(chart_dir, "all_charts.xlsx") ,
+                         overwrite = TRUE)  
+}
 
 
 

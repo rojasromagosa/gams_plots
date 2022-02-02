@@ -50,7 +50,7 @@ my_theme3 <- list(
                    axis.text.y = element_text(size = rel(1)),
                    legend.text = element_text(size = rel(1)),
                    legend.title = element_text(size = rel(1.1))),
-              scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black") )
+              scale_fill_manual(values = rep( c("cornflowerblue","royalblue","mediumblue","navy","black"), 10 )) # used in bars, needs to be long
 )
               
 
