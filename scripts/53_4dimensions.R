@@ -204,7 +204,7 @@ plot.var.4dim <- function(var_tmp, dimension){
   }
   
   #' Create Workbook where all plots for this variable will be saved
-  wb <- openxlsx::createWorkbook()
+  # wb <- openxlsx::createWorkbook()
   
   #' Define a function that, for a given variable, will process all the rows 
   #' in the Excel input file. For each row, it checks which chart to create
@@ -326,11 +326,11 @@ plot.var.4dim <- function(var_tmp, dimension){
     #' Finally close and save the Excel file containing all the charts data for
     #' a given variable
     #' Note: we do this only if the workbook contains at least one sheet
-    if(length(openxlsx::sheets(wb))>0){
-    openxlsx::saveWorkbook(wb,
-                           file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
-                           overwrite = TRUE) 
-    }
+    # if(length(openxlsx::sheets(wb))>0){
+    # openxlsx::saveWorkbook(wb,
+    #                        file.path(chart_dir, folder_name, var_tmp, paste0(var_tmp, "_charts.xlsx") ),
+    #                        overwrite = TRUE) 
+    # }
   }
   
   
