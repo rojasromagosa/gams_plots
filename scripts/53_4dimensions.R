@@ -1,7 +1,8 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Description  ----
 
-#' this file can process variables of two dimensions
+#' this file processes variables with 4 dimensions, r-var3-var3f-t
+#' where var3f is a dimension that we keep fixed.
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,6 +21,7 @@ d_4dim %<>%
   mutate(rescale = if_else(is.na(rescale), "inScale", rescale), # if empty use inScale
          export_var_data = if_else(is.na(export_var_data), 0, export_var_data),
          compute_shares = if_else(is.na(compute_shares), 0, compute_shares),
+         aggregate = if_else(is.na(aggregate), 0, aggregate),
          theme = if_else(is.na(theme), "my_theme3", theme),
          export_chart_data = if_else( is.na(export_chart_data), 0, export_chart_data))# if empty dont save
 
@@ -48,9 +50,10 @@ d_4dim <- merge(
 d_4dim <- bind_rows(
   # list of variables
   d_4dim  %>%
+    filter( aggregate == 0 ) %>%
     mutate( aggr = ""),  # list of variables with "new" dimension
   d_4dim %>%
-    filter( str_detect(domnames_v, "-a-|^a-|-a$") ) %>%
+    filter( aggregate == 1 ) %>%
     mutate(domnames_v = gsub("^a|a$|(?<=-)a(?=-)", "aga", domnames_v, perl = T))  %>%  # substitute a with aga, keeping track of different possible positions of a
     mutate( aggr = "_aggr")
 )
@@ -67,7 +70,7 @@ d_4dim %<>%
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Variables with 3 dimensions  ----
+# Variables with 4 dimensions  ----
 
 #' check everything is correct:
 #' - the variables have correct names
@@ -99,10 +102,10 @@ read_in_all_data4 <- function(var_name,
   
   # ~~~~~~~~~~~~
   # debug start: 
-  # var_name <- "vav"
+  # var_name <- "plab1"
   # var_label <- "test name"
   # var_rescale <- "inScale"
-  # compute_shares <- 1
+  # compute_shares <- 0
   # var_dimensions <- "a-v-t"
   # var_dimensions <- "aga-v-t"
   # fixed_dimension <- "v"
@@ -170,16 +173,18 @@ read_in_all_data4
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Make charts  ----
 
-
+#' Define a function that processes one variable-dimension at a time. We also differentiate by
+#' dimension to keep track of whether a dimension is aggregated or not.
 
 plot.var.4dim <- function(var_tmp, dimension){
   
-  #debug: var_tmp = "vav"
-  #debug: dimension = "a-v-t"
+  #debug: var_tmp = "plab1"
+  #debug: dimension = "aga-v-t"
   
-  # For a specific variable and associated dimension subset the data
+  # list of charts to be created for a given variable x dimension
   d_4dim_tmp <- d_4dim %>% filter(variable_name==var_tmp,
                                   domnames_v==dimension)
+  # Get all data for a given variable x dimension
   d_tmp <- d %>% filter(var==var_tmp,
                         domnames_v==dimension)
   
@@ -213,7 +218,8 @@ plot.var.4dim <- function(var_tmp, dimension){
     # debug start:
     # ~~~~~~~~~~~~
     # chart_type = "bau_level_bar"
-    # chart_type = "sim_%bau_bar"
+    # chart_type = "sim_%bau_oneyear_bar"
+    # chart_type = "sim_%bau_allyears_bar"
     # year_span = 2020
     # year_span = c(2025, 2030)
     # theme = "my_theme3"
@@ -268,8 +274,8 @@ plot.var.4dim <- function(var_tmp, dimension){
                     x = NULL,
                     y = ifelse(compute_shares==T, "% of total", "Baseline value" ), 
                     fill = NULL) +
-               gg_theme +
-               if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
+               gg_theme  + rot.axis(uni_factors)
+
              
              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, "_", y, chart_ext) ),
                      units = "in",
@@ -281,14 +287,18 @@ plot.var.4dim <- function(var_tmp, dimension){
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
            }
       )
-    } else if (chart_type=="sim_%bau_bar"){
+    } else if (chart_type=="sim_%bau_oneyear_bar"){
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       # simulation: for a given year, show the changes wrt baseline, for each level
       map2( d_tmp$r %>% unique,
             d_tmp$var3f %>% unique,
+            
             function(x,y){
               # debug: x="IDN"
               # debug: y="Old"
+              
+              if(length(year_span)>1)stop("For sim_%bau_oneyear_bar only one year can be used!")
+              
               d_chart <- d_tmp %>%
                 filter(r == x,
                        var3f == y,
@@ -304,12 +314,11 @@ plot.var.4dim <- function(var_tmp, dimension){
                theme(legend.position="top",
                      legend.title=element_blank()) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
-                    subtitle = paste0(x, ", Simulations" ),
+                    subtitle = paste0(x, ", Simulations (", year_span, ")" ),
                     x = NULL,
                     y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
                     fill = NULL) +
-               gg_theme +
-               if(uni_factors>6){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}
+               gg_theme + rot.axis(uni_factors)
              
              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, "_", y, chart_ext) ),
                      units = "in",
@@ -320,6 +329,50 @@ plot.var.4dim <- function(var_tmp, dimension){
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
            }
+      )
+    } else if (chart_type=="sim_%bau_allyears_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulation: for a given year, show the changes wrt baseline, for each level
+      map2( d_tmp$r %>% unique,
+            d_tmp$var3f %>% unique,
+            
+            function(x,y){
+              # debug: x="IDN"
+              # debug: y="Old"
+              
+              d_chart <- d_tmp %>%
+                filter(r == x,
+                       var3f == y,
+                       sim != "BaU",
+                       t %in% year_span)
+              
+              # we need to create new labels: yearXsim
+              d_chart %<>% mutate(lab = paste0(t, "\n", sim))
+              
+              compute_shares <- d_chart$compute_shares[1]
+              uni_factors <- d_chart$lab %>% unique %>% length # this is probably not enough, if we have many simulations
+              
+              ggplot(d_chart, aes(x=lab, y=change, fill=var3)) +
+                geom_col(position = position_dodge()) +
+                scale_y_continuous(n.breaks = 8) +
+                theme(legend.position="top",
+                      legend.title=element_blank()) +
+                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
+                     subtitle = paste0(x, ", Simulations (", y, ")" ),
+                     x = NULL,
+                     y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
+                     fill = NULL) +
+                gg_theme + rot.axis(uni_factors)
+              
+              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, "_", y, chart_ext) ),
+                      units = "in",
+                      scale = 0.8,
+                      height = 5,
+                      width = 0.01 + 8* (uni_factors/4)^0.2  )
+              
+              # add data to the Excel file
+              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
+            }
       )
     }
     
