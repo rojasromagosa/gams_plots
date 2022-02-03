@@ -45,7 +45,7 @@ input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of
 #' name of the Excel file containing the list of variables
 #input_excel <- file.path( getwd(),
 input_excel <- file.path(#"C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx"
-                          "input_variables_list/Manage_input_variables_list_IDN_v00.xlsx"
+                          "input_variables_list/Manage_input_variables_list_IDN_v01.xlsx"
                           )
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,6 +59,7 @@ packages <- c("magrittr",
               "forcats",
               "gdxrrw",
               "reshape2",
+              "openxlsx",
               "readxl"
               # "hrbrthemes",
               #"patchwork"
@@ -200,6 +201,13 @@ years_all <- rgdx( file.path(input_dir, input_files[1]), list(name = "t", form =
 # years selections
 years_5 <- seq(min(years_all), max(years_all), 5)
 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Excel file  ----
+
+#' Create Workbook where all plots for this variable will be saved
+wb <- openxlsx::createWorkbook()
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 2 dim variables (r-t)  ----
 
@@ -234,7 +242,7 @@ d_meta %>%
 #' The list of variables to be plotted from the Excel file
 d_3dim  <- read_excel(input_excel,
                       sheet = "3dim",
-                      col_types = c("text","text","text","numeric","numeric","text","text","text","numeric"))
+                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","numeric"))
 source("scripts/52_3dimensions.R")
 
 
@@ -247,7 +255,7 @@ d_meta %>% filter(nb_dimensions==4) %>% count(domnames_v)
 #' The list of variables to be plotted from the Excel file
 d_4dim  <- read_excel(input_excel,
                       sheet = "4dim",
-                      col_types = c("text","text","text","numeric","numeric","text","text","text","text","numeric"))
+                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","text","numeric"))
 source("scripts/53_4dimensions.R")
 
 
@@ -264,9 +272,14 @@ d_5dim  <- read_excel(input_excel,
 source("scripts/54_5+dimensions.R")
 
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Close Excel  ----
 
-
-
+if(length(openxlsx::sheets(wb))>0){
+  openxlsx::saveWorkbook(wb,
+                         file.path(chart_dir, "all_charts.xlsx") ,
+                         overwrite = TRUE)  
+}
 
 
 

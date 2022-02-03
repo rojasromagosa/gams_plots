@@ -36,6 +36,8 @@ xaxis <- theme(axis.title.y=element_text(size= 12,angle=90), margin = margin(t=0
 
 
 #' Instead of defining the size of each element, we can also specify the size relative to the default size
+#' we can make the rotation of the axis ticks conditional on the number of levels. Here we define uni_factor 
+rot.axis <- function(uni_factors){ if(uni_factors>7){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}}
 my_theme3 <- list(
               theme(text=element_text(size=11), #default text size
                    panel.border = element_blank(), # delete panel border
@@ -50,7 +52,9 @@ my_theme3 <- list(
                    axis.text.y = element_text(size = rel(1)),
                    legend.text = element_text(size = rel(1)),
                    legend.title = element_text(size = rel(1.1))),
-              scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black") )
+              #if(uni_factors>7){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))},
+              scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black",
+                                           "cornflowerblue","royalblue","mediumblue","navy")) # used in bars, needs to be long
 )
               
 
