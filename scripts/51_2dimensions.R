@@ -158,13 +158,11 @@ plot.var.2dim <- function(var_tmp){
                     y = "% growth in baseline") + 
                gg_theme
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 5,
-                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  
-             )
-             
+             # save
+             custom.save.t(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                           data = d_chart)
+
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
              
@@ -192,11 +190,10 @@ plot.var.2dim <- function(var_tmp){
                     y = NULL) + 
                gg_theme
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 5,
-                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
+             # save
+             custom.save.t(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext)),
+                           data = d_chart)
              
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
@@ -226,11 +223,10 @@ plot.var.2dim <- function(var_tmp){
                     y = "% growth") +
                gg_theme 
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 6,
-                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
+             # save
+             custom.save.t(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                           data = d_chart)
              
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
