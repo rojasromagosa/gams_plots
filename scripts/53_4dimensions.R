@@ -172,6 +172,13 @@ d <- pmap_dfr(list(
 read_in_all_data4
 )
 
+# Get simulation new names
+d %<>%
+  mutate( sim_l = d_labels$new[match(d$sim, d_labels$old)] ) %>% 
+  mutate( sim_l = ifelse(is.na(sim_l), sim, sim_l)) %>% 
+  mutate( var3_l = d_labels$new[match(d$var3, d_labels$old)] ) %>% 
+  mutate( var3 = ifelse(is.na(var3_l), var3, var3_l) )
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Make charts  ----
@@ -309,7 +316,7 @@ plot.var.4dim <- function(var_tmp, dimension){
              compute_shares <- d_chart$compute_shares[1]
              uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
              
-             ggplot(d_chart, aes(x=var3, y=change, fill=sim)) +
+             ggplot(d_chart, aes(x=var3, y=change, fill=sim_l)) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
@@ -346,7 +353,7 @@ plot.var.4dim <- function(var_tmp, dimension){
                        t %in% year_span)
               
               # we need to create new labels: yearXsim
-              d_chart %<>% mutate(lab = paste0(t, "\n", sim))
+              d_chart %<>% mutate(lab = paste0(t, "\n", sim_l))
               
               compute_shares <- d_chart$compute_shares[1]
               uni_factors <- d_chart$lab %>% unique %>% length # this is probably not enough, if we have many simulations
