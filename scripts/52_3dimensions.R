@@ -23,6 +23,9 @@ d_3dim %<>%
          compute_shares = if_else(is.na(compute_shares), 0, compute_shares),
          aggregate = if_else(is.na(aggregate), 0, aggregate),
          theme = if_else(is.na(theme), "my_theme3", theme),
+         simulations = if_else(is.na(simulations),
+                               input_files_names %>% list,
+                               str_split(simulations, ',') %>% lapply(., str_trim)),
          export_chart_data = if_else( is.na(export_chart_data), 0, export_chart_data))# if empty dont save
 
 #' Process selected years for each chart
@@ -216,7 +219,7 @@ plot.var.3dim <- function(var_tmp, dimension){
   
   #' Define a function that, for a given variable, will process all the rows 
   #' in the Excel input file. For each row, it checks which chart to create
-  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
+  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, simulations, d_tmp=d_tmp, var_tmp=var_tmp){
     # ~~~~~~~~~~~~
     # debug start:
     # ~~~~~~~~~~~~
@@ -228,6 +231,7 @@ plot.var.3dim <- function(var_tmp, dimension){
     # theme = "my_theme3"
     # export_chart_data = 1
     # chart_name = "test_chart"
+    # simulations = input_files_names
     # ~~~~~~~~~~~
     # debug end
     # ~~~~~~~~~~~
@@ -267,8 +271,6 @@ plot.var.3dim <- function(var_tmp, dimension){
              ggplot(d_chart, aes(x=var3, y=value, fill=factor(t))) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
-               theme(legend.position="top",
-                     legend.title=element_blank()) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
                     subtitle = paste0(x, ", Baseline" ),
                     x = NULL,
@@ -276,11 +278,10 @@ plot.var.3dim <- function(var_tmp, dimension){
                     fill = NULL) +
                gg_theme + rot.axis(uni_factors)
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 5,
-                     width = 0.01 + 8* (uni_factors/4)^0.2  )
+             # save
+             custom.save.f(my_theme = gg_theme,
+                         filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                         factors = uni_factors)
              
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
@@ -296,6 +297,7 @@ plot.var.3dim <- function(var_tmp, dimension){
              # debug: x="IDN"
              d_chart <- d_tmp %>%
                filter(r == x,
+                      sim %in% simulations,
                       sim != "BaU",
                       t %in% year_span)
              
@@ -306,8 +308,6 @@ plot.var.3dim <- function(var_tmp, dimension){
              ggplot(d_chart, aes(x=var3, y=change, fill=sim)) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
-               theme(legend.position="top",
-                     legend.title=element_blank()) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
                     subtitle = paste0(x, ", Simulations (", year_span, ")" ),
                     x = NULL,
@@ -315,11 +315,10 @@ plot.var.3dim <- function(var_tmp, dimension){
                     fill = NULL) +
                gg_theme + rot.axis(uni_factors)
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 5,
-                     width = 0.01 + 8* (uni_factors/4)^0.2  )
+             # save
+             custom.save.f(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                           factors = uni_factors)
              
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
@@ -333,6 +332,7 @@ plot.var.3dim <- function(var_tmp, dimension){
              # debug: x="IDN"
              d_chart <- d_tmp %>%
                filter(r == x,
+                      sim %in% simulations,
                       sim != "BaU",
                       t %in% year_span)
              
@@ -346,8 +346,6 @@ plot.var.3dim <- function(var_tmp, dimension){
              ggplot(d_chart, aes(x=lab, y=change, fill=var3)) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
-               theme(legend.position="top",
-                     legend.title=element_blank()) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
                     subtitle = paste0(x, ", Simulations" ),
                     x = NULL,
@@ -355,11 +353,10 @@ plot.var.3dim <- function(var_tmp, dimension){
                     fill = NULL) +
                gg_theme + rot.axis(uni_factors)
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 5,
-                     width = 0.01 + 8* (uni_factors/4)^0.2  )
+             # save
+             custom.save.f(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                           factors = uni_factors)
              
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))}
@@ -384,7 +381,8 @@ plot.var.3dim <- function(var_tmp, dimension){
     year_span = d_3dim_tmp$year_span,
     theme = d_3dim_tmp$theme,
     export_chart_data = d_3dim_tmp$export_chart_data,
-    chart_name = d_3dim_tmp$chart_name
+    chart_name = d_3dim_tmp$chart_name,
+    simulations = d_3dim_tmp$simulations
   ),
   all.charts,
   d_tmp=d_tmp, # pass in data
