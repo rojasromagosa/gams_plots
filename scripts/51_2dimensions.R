@@ -21,6 +21,9 @@ d_2dim %<>%
   mutate(rescale = if_else(is.na(rescale), "inScale", rescale), # if empty use inScale
          export_var_data = if_else(is.na(export_var_data), 0, export_var_data),
          theme = if_else(is.na(theme), "my_theme3", theme),
+         simulations = if_else(is.na(simulations),
+                               input_files_names %>% list,
+                               str_split(simulations, ',') %>% lapply(., str_trim)),
          export_chart_data = if_else( is.na(export_chart_data), 0, export_chart_data))# if empty dont save
 
 #' Process selected years for each chart
@@ -95,7 +98,7 @@ plot.var.2dim <- function(var_tmp){
   #' Define a function that, for a given variable, will process all the rows 
   #' in the Excel input file. For each row, it checks which chart to create
   #' var_tmp and d_tmp are passed in from the function below
-  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, d_tmp=d_tmp, var_tmp=var_tmp){
+  all.charts <- function(chart_type,year_span,theme,export_chart_data, chart_name, simulations, d_tmp=d_tmp, var_tmp=var_tmp){
     # ~~~~~~~~~~~~
     # debug start:
     # ~~~~~~~~~~~~
@@ -109,6 +112,7 @@ plot.var.2dim <- function(var_tmp){
     # theme = "my_theme3"
     # export_chart_data = 1
     # chart_name = "test"
+    # simulations = input_files_names
     # ~~~~~~~~~~~
     # debug end
     # ~~~~~~~~~~~
@@ -207,6 +211,7 @@ plot.var.2dim <- function(var_tmp){
              # debug: x="USA"
              d_chart <- d_tmp %>%
                filter(r == x,
+                      sim %in% simulations,
                       t != min(t),
                       t %in% year_span)
              
@@ -214,14 +219,12 @@ plot.var.2dim <- function(var_tmp){
                geom_line(size=0.8) +
                scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
                scale_y_continuous(n.breaks = 8) +
-               gg_theme +
-               theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
-                     legend.position="top",
-                     legend.title=element_blank()) +
+               theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # a better way of doing this
                     subtitle = paste0(x, ", % growth rate" ),
                     x = NULL,
-                    y = "% growth") 
+                    y = "% growth") +
+               gg_theme 
              
              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
                      units = "in",
@@ -240,6 +243,7 @@ plot.var.2dim <- function(var_tmp){
               # debug: x="CHN"
               d_chart <- d_tmp %>%
                 filter(r == x,
+                       sim %in% simulations,
                        sim != "BaU",
                        t %in% year_span)
               
@@ -247,21 +251,18 @@ plot.var.2dim <- function(var_tmp){
                 geom_line(size=2) + 
                 scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
                 scale_y_continuous(n.breaks = 8) +
-                gg_theme + 
-                theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9),
-                      legend.position="top",
-                      legend.title=element_blank()) +
+                theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
                 labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
                      subtitle = paste0(x, ", % change w.r.t. baseline" ),
                      x = "",
-                     y = "% change w.r.t. baseline") 
+                     y = "% change w.r.t. baseline") +
+                gg_theme 
               
-              ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                      units = "in",
-                      scale = 0.8,
-                      height = 6,
-                      width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  )
-              
+              # save
+              custom.save.t(my_theme = gg_theme,
+                            filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                            data = d_chart)
+
               # add data to the Excel file
               if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
           }
@@ -272,6 +273,7 @@ plot.var.2dim <- function(var_tmp){
            function(x){
              # debug: x="CHN"
              d_chart <- d_tmp %>% filter( r == x,
+                                          sim %in% simulations,
                                           sim != "BaU",
                                           t %in% year_span )
              
@@ -279,20 +281,17 @@ plot.var.2dim <- function(var_tmp){
              ggplot(d_chart, aes(x=factor(t), y=change, fill=sim)) +
                geom_col(position=position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
-               gg_theme + 
-               theme(legend.position="top",
-                     legend.title=element_blank()) +
                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
                     subtitle = paste0(x, ", % change w.r.t. baseline" ),
                     x = NULL,
-                    y = "% change w.r.t. baseline") 
+                    y = "% change w.r.t. baseline") +
+               gg_theme 
              
-             ggsave( file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
-                     units = "in",
-                     scale = 0.8,
-                     height = 6,
-                     width = 0.01 + 8* (length(unique(d_chart$t))/16)^0.2  ) 
-             
+             # save
+             custom.save.t(my_theme = gg_theme,
+                         filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext)),
+                         data = d_chart)
+
              # add data to the Excel file
              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name) )}
              
@@ -309,7 +308,8 @@ plot.var.2dim <- function(var_tmp){
       year_span = d_2dim_tmp$year_span,
       theme = d_2dim_tmp$theme,
       export_chart_data = d_2dim_tmp$export_chart_data,
-      chart_name = d_2dim_tmp$chart_name
+      chart_name = d_2dim_tmp$chart_name,
+      simulations = d_2dim_tmp$simulations
     ),
     all.charts,
     d_tmp=d_tmp, # pass in data
