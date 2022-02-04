@@ -41,6 +41,7 @@ gams_dir <- "C:/GAMS/36"
 #' names of files to be imported (there is one file for each simulation)
 # input_files <- c("BaU.gdx", "Sim1_RenW.gdx", "Sim2_RenAlt.gdx") # use a list of files
 input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of files with a .gdx extension
+input_files_names <- gsub("\\.gdx", "", input_files)
 
 #' name of the Excel file containing the list of variables
 #input_excel <- file.path( getwd(),
@@ -60,7 +61,8 @@ packages <- c("magrittr",
               "gdxrrw",
               "reshape2",
               "openxlsx",
-              "readxl"
+              "readxl",
+              "RColorBrewer"
               # "hrbrthemes",
               #"patchwork"
 )
@@ -216,7 +218,7 @@ d_meta %>% filter(nb_dimensions==2) %>% count(domnames_v)
 #' The list of variables to be plotted from the Excel file
 d_2dim  <- read_excel(input_excel,
                       sheet = "2dim",
-                      col_types = c("text","text","text","numeric","numeric","text","text","text","numeric"))
+                      col_types = c("text","text","text","numeric","numeric","text","text","text","numeric","text"))
 source("scripts/51_2dimensions.R")
 
 
@@ -242,7 +244,7 @@ d_meta %>%
 #' The list of variables to be plotted from the Excel file
 d_3dim  <- read_excel(input_excel,
                       sheet = "3dim",
-                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","numeric"))
+                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","numeric","text"))
 source("scripts/52_3dimensions.R")
 
 
@@ -255,7 +257,7 @@ d_meta %>% filter(nb_dimensions==4) %>% count(domnames_v)
 #' The list of variables to be plotted from the Excel file
 d_4dim  <- read_excel(input_excel,
                       sheet = "4dim",
-                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","text","numeric"))
+                      col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","text","numeric","text"))
 source("scripts/53_4dimensions.R")
 
 
