@@ -59,6 +59,11 @@ import.data
 
 d %<>% changes.wrt.baseline
 
+# match the new names of the simulations
+d %<>%
+  mutate( sim_l = d_labels$new[match(d$sim, d_labels$old)] ) %>% 
+  mutate( sim_l = ifelse(is.na(sim_l), sim, sim_l))
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Plot single variables  ----
@@ -140,7 +145,7 @@ plot.var.2dim <- function(var_tmp){
       # baseline: line graph with growth rates
       map( d_tmp$r %>% unique,
            function(x){
-             # debug: x="USA"
+             # debug: x="IDN"
              d_chart <- d_tmp %>%
                filter(r == x,
                       sim == "BaU",
@@ -212,7 +217,7 @@ plot.var.2dim <- function(var_tmp){
                       t != min(t),
                       t %in% year_span)
              
-             ggplot(d_chart, aes(x=t, y=value_g, color=sim)) +
+             ggplot(d_chart, aes(x=t, y=value_g, color=sim_l)) +
                geom_line(size=0.8) +
                scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
                scale_y_continuous(n.breaks = 8) +
@@ -243,7 +248,7 @@ plot.var.2dim <- function(var_tmp){
                        sim != "BaU",
                        t %in% year_span)
               
-              ggplot(d_chart, aes(x=t, y=change, colour=sim)) +
+              ggplot(d_chart, aes(x=t, y=change, colour=sim_l)) +
                 geom_line(size=2) + 
                 scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
                 scale_y_continuous(n.breaks = 8) +
@@ -274,7 +279,7 @@ plot.var.2dim <- function(var_tmp){
                                           t %in% year_span )
              
              
-             ggplot(d_chart, aes(x=factor(t), y=change, fill=sim)) +
+             ggplot(d_chart, aes(x=factor(t), y=change, fill=sim_l)) +
                geom_col(position=position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),

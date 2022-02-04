@@ -204,6 +204,17 @@ years_all <- rgdx( file.path(input_dir, input_files[1]), list(name = "t", form =
 years_5 <- seq(min(years_all), max(years_all), 5)
 
 
+
+## 3) Labels
+
+#' For Manage, we import the labels from the Excel file
+d_labels <- read_excel(input_excel,
+                       sheet = "labels")
+#' if there are empty rows we fill them in with
+#' the original name
+d_labels %<>% mutate(new = ifelse(is.na(new), old, new))
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Excel file  ----
 
