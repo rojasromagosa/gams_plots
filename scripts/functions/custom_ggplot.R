@@ -116,7 +116,7 @@ custom.save.f <- function(my_theme, filename, factors){
   ggsave( filename = filename,
           units = "in",
           scale = 0.8,
-          height = 6 + ifelse(grepl("top|bottom", my_theme[[1]]$legend.position), 12, 0),
+          height = 6 + ifelse(grepl("top|bottom", my_theme[[1]]$legend.position), 2, 0),
           width = 0.01 +
             0.01 + 8* (factors/4)^0.2 +
             ifelse( grepl("right|left", my_theme[[1]]$legend.position), 2, 0)
