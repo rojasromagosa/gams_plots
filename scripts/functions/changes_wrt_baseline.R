@@ -14,13 +14,14 @@ changes.wrt.baseline <- function(x){
   # add baseline as row
   names_by <- setdiff(names(x), c("sim","value", "value_g"))
   x <- left_join(x,
-                 x %>% filter(grepl("BaU", sim)) %>% select(-sim, -value_g),
+                 x %>% filter(grepl("^bau$", tolower(sim))) %>% select(-sim, -value_g),
                  by = names_by,
                  suffix = c("", "_bau"))
   
   #' percentage change w.r.t. baseline
   x %<>%
-    mutate(change = 100*(value - value_bau)/value_bau) 
+    mutate(change_per = 100*(value - value_bau)/value_bau) %>% 
+    mutate(change_lev = value - value_bau)
   
   #' output
   return(x)
