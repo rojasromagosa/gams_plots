@@ -82,6 +82,8 @@ source("scripts/functions/year_fix.R") # process and format years in Excel varia
 source("scripts/functions/import_data.R") # used to import one specific variable in one gdx file
 source("scripts/functions/changes_wrt_baseline.R") # computes growth rates, and %changes wrt baseline
 
+source("scripts/functions/custom_add_sheet.R") # Used to add sheets to the Excel file
+
 # set extension type for exported charts
 # this is accessed with the superassignment operator <<- in the function that produces the charts
 # chart_ext <- ".pdf"
@@ -288,6 +290,7 @@ source("scripts/54_5+dimensions.R")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Close Excel  ----
 
+# write the Excel file only if it contains written sheets
 if(length(openxlsx::sheets(wb))>0){
   openxlsx::saveWorkbook(wb,
                          file.path(chart_dir, "all_charts.xlsx") ,
