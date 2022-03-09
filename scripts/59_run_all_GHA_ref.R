@@ -1,0 +1,315 @@
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Description ----
+  
+  #' This file sources some code used to processing the gdx files and plot charts using a list of variables
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Setup ----
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## Directories ----
+  
+  rm(list = ls())
+  
+  #' Set the work directory of the main folder
+  try(setwd("~/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
+  try(setwd("C:/Users/valdes/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
+  try(setwd("Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino") , silent = T)
+  #try(setwd("C:/Users/wb388321/OneDrive - WBG/Projects/STC_Valentino/Rcode_Valentino") , silent = T)
+  try(setwd("C:/Users/wb388321/Documents/GitHub/gams_plots") , silent = T)
+  try(setwd("C:/Users/desil/Documents/GitHub/gams_plots") , silent = T)
+  
+  
+  #' Set the name of folder where the gdx files are located
+  #input_dir <- file.path(getwd(), "input_data/Manage")
+  #input_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Envisage')
+  #input_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Manage')
+  #input_dir <- file.path(getwd(), "input_data/Envisage")
+  #input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/res")
+  input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR_ref/res")
+  
+  #' directory where to save all plots (the folder needs to exist already)
+  #chart_dir <- file.path(getwd(), "charts/Manage")
+  #chart_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Envisage')
+  #chart_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Manage')
+  chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR_ref/charts")
+  
+  #' GAMS directory
+  #gams_dir <- "C:/GAMS/36"
+  gams_dir <- "C:/Program Files/GAMS36"
+  
+  #' names of files to be imported (there is one file for each simulation)
+  # input_files <- c("BaU.gdx", "Sim1_RenW.gdx", "Sim2_RenAlt.gdx") # use a list of files
+  input_files <- list.files(input_dir, pattern = "\\.gdx$") # read in the names of files with a .gdx extension
+  input_files_names <- gsub("\\.gdx", "", input_files)
+  
+  #' name of the Excel file containing the list of variables
+  #input_excel <- file.path( getwd(),
+  input_excel <- file.path(
+    "C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR_ref/charts/Manage_input_variables_list_GHA_v01.xlsx"
+                           # "input_variables_list/Manage_input_variables_list_IDN_v01.xlsx"
+                            )
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## Dependencies ----
+  packages <- c("magrittr",
+                "dplyr",
+                "ggplot2",
+                "stringr",
+                "tidyr",
+                "purrr",
+                "forcats",
+                "gdxrrw",
+                "reshape2",
+                "openxlsx",
+                "readxl",
+                "RColorBrewer"
+                # "hrbrthemes",
+                #"patchwork"
+  )
+  to.install <- setdiff(packages, rownames(installed.packages()))
+  if (length(to.install) > 0) {
+    install.packages(to.install)
+  }
+  lapply(packages, library, character.only = TRUE)
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## load functions and plot settings  ----
+  
+  source("scripts/functions/custom_ggplot.R") # plot themes
+  
+  source("scripts/functions/year_fix.R") # process and format years in Excel variable file
+  source("scripts/functions/import_data.R") # used to import one specific variable in one gdx file
+  source("scripts/functions/changes_wrt_baseline.R") # computes growth rates, and %changes wrt baseline
+  
+  # set extension type for exported charts
+  # this is accessed with the superassignment operator <<- in the function that produces the charts
+  # chart_ext <- ".pdf"
+  chart_ext <- ".png"
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## Load GAMS  ----
+  
+  # https://support.gams.com/doku.php?id=gdxrrw:interfacing_gams_and_r
+  
+  #' The data is read in using the gdxrrw package.
+  #' Most likely need to tell R where GAMS is located, since some libraries are used to import the data.
+  print(igdx(gamsSysDir = gams_dir))
+  #igdx()
+  
+  #' Ideally should make sure that the GDXRRW package works correctly.
+  #' Can do that by running the test function included in the package
+  #' Need to set the working directory to the location of the library,
+  #' otherwise it doesnt work (other files are sourced)
+  #' Press ESC to exit tests
+  test_gdx <- F
+  if(test_gdx==T){
+    dir <- getwd() # save current wd
+    setwd(file.path(path.package('gdxrrw'),'tests')) # setwd to package location
+    source("tAll.R") # run tests
+    setwd(dir) # restore original dir
+    rm(dir)
+  }
+  
+  #' check system paths, if necessary
+  # Sys.getenv("PATH") %>% strsplit(. ,";")
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Data info  ----
+  
+  #' get a data frame containing all of the variables, parameters, sets and their properties
+  #' It is used to check the dimensions of the variables in the excel files
+  
+  d_info <- gdxInfo(file.path(input_dir, input_files[1]), #
+                    dump = F,
+                    returnDF = T)
+  
+  #' Explore content:
+  #' contains some data frames and some vectors
+  sapply(d_info, class)
+  
+  #' (almost) all data frames have the same structure:
+  sapply( d_info[sapply(d_info, is.data.frame)], names  ) # what s aliases?
+  
+  #' merge all the data frames together, makes it easier to explore
+  d_meta <- d_info[sapply(d_info, is.data.frame)] %>%
+    bind_rows(., .id = "type")
+  
+  #' convert the dimension names to character
+  d_meta %<>%
+    mutate( domnames_v = sapply(domnames,
+                                function(x) x %>%
+                                  unlist %>%
+                                  .[!grepl("^\\s*$|^*$", .)] %>% # this doesnt work
+                                  paste0(., collapse = "-")  )) # %>% sort
+  
+  #' add a count for the number of dimenstions
+  #' Note: this is not really necessary for now, as the variables are selected in the Excel file.
+  #' problem 1: sometimes it is zero ?
+  d_meta %<>%
+          mutate("nb_dimensions" = ifelse(type=="variables" , str_count(domnames_v, "-") + 1, NA))
+  #' For Manage, we need to add 1. If there is mapRep then we are processing Manage,
+  #' therefore ad 1 to account for the implicit dimension "r".
+  if("mapRep" %in% d_meta$name){
+    d_meta %<>%
+      mutate("nb_dimensions" = nb_dimensions + 1 )
+  }
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Aggregation and labels  ----
+  
+  # 1) Aggregation of dimensions
+  
+  #' The aggregate variable is different for Manage and Envisage
+  #' therefore we create the aggregation dataframe depending on the
+  #' presence/absence of the aggregation set name in d_meta
+  
+      #' In Envisage the aggregation variable is called "mapaga"
+  if("mapaga" %in% d_meta$name){
+      d_agg <-  rgdx( file.path(input_dir, input_files[1]),
+                   list(name = "mapaga", form = "full"))$val %>%
+                as_tibble(rownames = "aga") %>%
+                melt(id="aga", variable.name="a") %>%
+                filter(value !=0) %>% # remove non relevant
+                filter(aga!=a) %>% # remove same aggregation
+                filter(aga!="ttot-a") %>% # remove total from aggregation
+                select(-value) %>%
+                rename(var = a,
+                       var_aggr = aga)
+      #' In Manage the aggregation variable is called "mapRep"
+  } else if ("mapRep" %in% d_meta$name) {
+      d_agg <-  rgdx( file.path(input_dir, input_files[1]),
+                      list(name = "mapRep", form = "full"))$val %>%
+                as_tibble(rownames = "is") %>%
+                melt(id="is", variable.name="isrep") %>%
+                filter(value !=0) %>% # remove non relevant
+                #filter(is0!=a) %>% # remove same aggregation
+                select(-value) %>%
+                rename(var = is,
+                       var_aggr = isrep)
+  }
+  
+  
+  
+  ## 2) Years for reporting
+  
+  # years for reporting ( "treport" is not available in this gdx file?)
+  years_all <- rgdx( file.path(input_dir, input_files[1]), list(name = "t", form = "full"))$val %>%
+    as_tibble(rownames = "y") %>%
+    filter(V1==1) %>%
+    pull(y) %>%
+    as.integer # all years as a vector
+  
+  # years selections
+  years_5 <- seq(min(years_all), max(years_all), 5)
+  
+  
+  
+  ## 3) Labels
+  
+  #' For Manage, we import the labels from the Excel file
+  d_labels <- read_excel(input_excel,
+                         sheet = "labels")
+  #' if there are empty rows we fill them in with
+  #' the original name
+  d_labels %<>% mutate(new = ifelse(is.na(new), old, new))
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Excel file  ----
+  
+  #' Create Workbook where all plots for this variable will be saved
+  wb <- openxlsx::createWorkbook()
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # 2 dim variables (r-t)  ----
+  
+  d_meta %>% filter(nb_dimensions==2) %>% count(domnames_v)
+  
+  #' The list of variables to be plotted from the Excel file
+  d_2dim  <- read_excel(input_excel,
+                        sheet = "2dim",
+                        col_types = c("text","text","text","numeric","numeric","text","text","text","numeric","text"))
+  source("scripts/51_2dimensions.R")
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # 3 dim variables  ----
+  
+  #' Explore variables having 3 dimensions (2 + r)
+  d_meta %>% filter(nb_dimensions==3) %>% count(domnames_v)
+  
+  #' Get a list of dimensions for which there exist aggregation of different levels
+  #' We dont use this, it is just as info
+  d_meta %>%
+    filter(name %in%
+             (d_meta %>%
+                filter(nb_dimensions==2) %>%
+                summarize(kk = str_extract(domnames_v, "^\\w*")) %>%
+                pull(kk) %>%
+                unique)
+    ) %>%
+    select(name, text, card)
+  
+  
+  #' The list of variables to be plotted from the Excel file
+  d_3dim  <- read_excel(input_excel,
+                        sheet = "3dim",
+                        col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","numeric","text"))
+  source("scripts/52_3dimensions.R")
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # 4 dim variables  ----
+  
+  #' Explore variables having 3 dimensions (2 + r)
+  d_meta %>% filter(nb_dimensions==4) %>% count(domnames_v)
+  
+  #' The list of variables to be plotted from the Excel file
+  d_4dim  <- read_excel(input_excel,
+                        sheet = "4dim",
+                        col_types = c("text","text","text","numeric","numeric","text","numeric","text","text","text","numeric","text"))
+  source("scripts/53_4dimensions.R")
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # 4 dim variables  ----
+  
+  #' Explore variables having 4+ dimensions (3 + r)
+  d_meta %>% filter(nb_dimensions>=5) %>% count(domnames_v)
+  
+  #' The list of variables to be plotted from the Excel file
+  d_5dim  <- read_excel(input_excel,
+                        sheet = "5+dim",
+                        col_types = c("text","text"))
+  source("scripts/54_5+dimensions.R")
+  
+  
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Close Excel  ----
+  
+  if(length(openxlsx::sheets(wb))>0){
+    openxlsx::saveWorkbook(wb,
+                           file.path(chart_dir, "all_charts.xlsx") ,
+                           overwrite = TRUE)  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
