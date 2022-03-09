@@ -29,11 +29,16 @@ d_2dim %<>%
 #' Process selected years for each chart
 d_2dim %<>% rowwise %>% mutate(year_span = year.fix(year_span, chart_type) %>% list)
 
+#' Chart names
 #' For a given variable, if we have the same plot with different years or styles, we need to create different names
 d_2dim %<>%
   group_by(variable_name, chart_type) %>%
   mutate(chart_name = row_number() -1) %>% 
-  mutate(chart_name = paste0(variable_name, "_", gsub("\\%", "", chart_type), if_else(chart_name>0, as.character(chart_name), ""))) %>% 
+  mutate(chart_name = paste0(variable_name,
+                             "_",
+                             #gsub("\\%", "", chart_type),
+                             d_labels$new[match(chart_type, d_labels$old)],
+                             if_else(chart_name>0, as.character(chart_name), ""))) %>% 
   ungroup()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,16 +130,6 @@ plot.var.2dim <- function(var_tmp){
     # we need to look into the parents environment for the chart extension
     # the alternative would be to pass it in as an argument? Note <<- is the superassignment operator
     chart_ext <<- chart_ext
-    
-    # a function that adds a sheet to the workbook that is created
-    custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
-      tmp_wb <<- wb
-      openxlsx::addWorksheet(tmp_wb,
-                             sheetName = s_name)
-      openxlsx::writeData(tmp_wb,
-                          sheet = s_name,
-                          d)
-    }
     
     # use the selected theme
     gg_theme <- get(theme)
@@ -239,6 +234,8 @@ plot.var.2dim <- function(var_tmp){
       )
       
     } else if (chart_type=="sim_%bau_line"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulations: line graph with % change from baseline
       map(  d$r %>% unique,
             function(x){
               # debug: x="CHN"
@@ -248,7 +245,7 @@ plot.var.2dim <- function(var_tmp){
                        sim != "BaU",
                        t %in% year_span)
               
-              ggplot(d_chart, aes(x=t, y=change, colour=sim_l)) +
+              ggplot(d_chart, aes(x=t, y=change_per, colour=sim_l)) +
                 geom_line(size=2) + 
                 scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
                 scale_y_continuous(n.breaks = 8) +
@@ -270,6 +267,8 @@ plot.var.2dim <- function(var_tmp){
       )
       
     } else if (chart_type=="sim_%bau_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulations: bar chart % change from baseline
       map( d$r %>% unique,
            function(x){
              # debug: x="CHN"
@@ -279,7 +278,7 @@ plot.var.2dim <- function(var_tmp){
                                           t %in% year_span )
              
              
-             ggplot(d_chart, aes(x=factor(t), y=change, fill=sim_l)) +
+             ggplot(d_chart, aes(x=factor(t), y=change_per, fill=sim_l)) +
                geom_col(position=position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
@@ -298,8 +297,71 @@ plot.var.2dim <- function(var_tmp){
              
              }
       )
+    } else if (chart_type=="sim_levdiff_line"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulations: line graph with % change from baseline
+      map(  d$r %>% unique,
+            function(x){
+              # debug: x="CHN"
+              d_chart <- d_tmp %>%
+                filter(r == x,
+                       sim %in% simulations,
+                       sim != "BaU",
+                       t %in% year_span)
+              
+              ggplot(d_chart, aes(x=t, y=change_lev, colour=sim_l)) +
+                geom_line(size=2) + 
+                scale_x_continuous(breaks = d_chart$t, minor_breaks = NULL, ) +
+                scale_y_continuous(n.breaks = 8) +
+                theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9)) +
+                labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
+                     subtitle = paste0(x, ", change w.r.t. baseline" ),
+                     x = "",
+                     y = "change w.r.t. baseline") +
+                gg_theme 
+              
+              # save
+              custom.save.t(my_theme = gg_theme,
+                            filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext) ),
+                            data = d_chart)
+              
+              # add data to the Excel file
+              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name))} 
+            }
+      )
       
-    }
+    } else if (chart_type=="sim_levdiff_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulations: bar chart % change from baseline
+      map( d$r %>% unique,
+           function(x){
+             # debug: x="CHN"
+             d_chart <- d_tmp %>% filter( r == x,
+                                          sim %in% simulations,
+                                          sim != "BaU",
+                                          t %in% year_span )
+             
+             
+             ggplot(d_chart, aes(x=factor(t), y=change_lev, fill=sim_l)) +
+               geom_col(position=position_dodge()) +
+               scale_y_continuous(n.breaks = 8) +
+               labs(title = d_2dim %>% filter(variable_name==var_tmp) %>% pull(variable_label),
+                    subtitle = paste0(x, ", change w.r.t. baseline" ),
+                    x = NULL,
+                    y = "change w.r.t. baseline") +
+               gg_theme 
+             
+             # save
+             custom.save.t(my_theme = gg_theme,
+                           filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, chart_ext)),
+                           data = d_chart)
+             
+             # add data to the Excel file
+             if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name) )}
+             
+           }
+      )
+    } # add new chart here: else if (chart_type=="new chart name")
   }
 
   
