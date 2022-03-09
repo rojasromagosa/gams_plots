@@ -219,6 +219,10 @@ themeNT5 <-   list(
 # xaxis <- theme(axis.title.y=element_text(size= 12,angle=90), margin = margin(t=0, r=10, b=0, l=0))
 rot.axis <- function(uni_factors){ if(uni_factors>7){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}}
 
+#' delete legend if have only one factor
+delete.legend <- function(uni_fill){ if(uni_fill==1){theme(legend.position="none")}}
+
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # customized save function  ----
