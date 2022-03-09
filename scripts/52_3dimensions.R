@@ -249,11 +249,11 @@ plot.var.3dim <- function(var_tmp, dimension){
     # a function that adds a sheet to the workbook that is created
     custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
       tmp_wb <<- wb
-      openxlsx::addWorksheet(tmp_wb,
-                             sheetName = s_name)
-      openxlsx::writeData(tmp_wb,
-                          sheet = s_name,
-                          d)
+#HRR      openxlsx::addWorksheet(tmp_wb,
+#HRR                             sheetName = s_name)
+#HRR      openxlsx::writeData(tmp_wb,
+#HRR                          sheet = s_name,
+#HRR                          d)
     }
     
     # use the selected theme
@@ -280,7 +280,7 @@ plot.var.3dim <- function(var_tmp, dimension){
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
                     subtitle = paste0(x, ", Baseline" ),
                     x = NULL,
-                    y = ifelse(compute_shares==T, "% of total", "Baseline value" ), 
+                    y = ifelse(compute_shares==T, "share of total", "Baseline value" ), 
                     fill = NULL) +
                gg_theme + rot.axis(uni_factors)
              

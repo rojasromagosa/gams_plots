@@ -247,11 +247,11 @@ plot.var.4dim <- function(var_tmp, dimension){
     # a function that adds a sheet to the workbook that is created
     custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
       tmp_wb <<- wb
-      openxlsx::addWorksheet(tmp_wb,
-                             sheetName = s_name)
-      openxlsx::writeData(tmp_wb,
-                          sheet = s_name,
-                          d)
+#HRR      openxlsx::addWorksheet(tmp_wb,
+#HRR                             sheetName = s_name)
+#HRR      openxlsx::writeData(tmp_wb,
+#HRR                          sheet = s_name,
+#HRR                          d)
     }
     
     # use the selected theme
