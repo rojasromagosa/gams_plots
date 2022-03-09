@@ -23,20 +23,20 @@ try(setwd("C:/Users/desil/Documents/GitHub/gams_plots") , silent = T)
 #' Set the name of folder where the gdx files are located
 #input_dir <- file.path(getwd(), "input_data/Manage")
 #input_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Envisage')
-input_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Manage')
+#input_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/input_data/Manage')
 #input_dir <- file.path(getwd(), "input_data/Envisage")
-#input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/res")
+input_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/res")
 
 
 #' directory where to save all plots (the folder needs to exist already)
 #chart_dir <- file.path(getwd(), "charts/Manage")
 #chart_dir <- file.path('Z:Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Envisage')
-chart_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Manage')
-#chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts")
+#chart_dir <- file.path('Z:/Dropbox/Valentino/Projects/WB_plots/Rcode_Valentino/charts/Manage')
+chart_dir <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/charts")
 
 #' GAMS directory
-gams_dir <- "C:/GAMS/36"
-#gams_dir <- "C:/Program Files/GAMS36"
+#gams_dir <- "C:/GAMS/36"
+gams_dir <- "C:/Program Files/GAMS36"
 
 #' names of files to be imported (there is one file for each simulation)
 # input_files <- c("BaU.gdx", "Sim1_RenW.gdx", "Sim2_RenAlt.gdx") # use a list of files
@@ -45,8 +45,8 @@ input_files_names <- gsub("\\.gdx", "", input_files)
 
 #' name of the Excel file containing the list of variables
 #input_excel <- file.path( getwd(),
-input_excel <- file.path(#"C:/Users/wb388321/Documents/CGEmodels/MANAGE_GHA_CCDR/charts/Manage_input_variables_list_v02.xlsx"
-                          "input_variables_list/Manage_input_variables_list_IDN_v01.xlsx"
+input_excel <- file.path("C:/Users/wb388321/Documents/CGEmodels/mngwb-IDN-GEN/charts/Manage_input_variables_list_IDN_v01.xlsx"
+                         # "input_variables_list/Manage_input_variables_list_IDN_v01.xlsx"
                           )
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,8 +81,6 @@ source("scripts/functions/custom_ggplot.R") # plot themes
 source("scripts/functions/year_fix.R") # process and format years in Excel variable file
 source("scripts/functions/import_data.R") # used to import one specific variable in one gdx file
 source("scripts/functions/changes_wrt_baseline.R") # computes growth rates, and %changes wrt baseline
-
-source("scripts/functions/custom_add_sheet.R") # Used to add sheets to the Excel file
 
 # set extension type for exported charts
 # this is accessed with the superassignment operator <<- in the function that produces the charts
@@ -290,7 +288,6 @@ source("scripts/54_5+dimensions.R")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Close Excel  ----
 
-# write the Excel file only if it contains written sheets
 if(length(openxlsx::sheets(wb))>0){
   openxlsx::saveWorkbook(wb,
                          file.path(chart_dir, "all_charts.xlsx") ,

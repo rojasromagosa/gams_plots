@@ -62,13 +62,17 @@ d_4dim <- bind_rows(
 )
 
 
-
+#' Chart names
 #' For a given variable, if we have the same plot with different years or styles, we need to create different names
 d_4dim %<>%
   group_by(variable_name, chart_type) %>%
   mutate(chart_name = row_number() -1) %>% 
-  mutate(chart_name = paste0(variable_name, "_", gsub("\\%", "", chart_type), if_else(chart_name>0, as.character(chart_name), ""))) %>% 
-  mutate(chart_name = if_else(grepl("aga", domnames_v), paste0("agg_", chart_name), chart_name)) %>% 
+  mutate(chart_name = paste0(variable_name,
+                             "_",
+                             #gsub("\\%", "", chart_type),
+                             d_labels$new[match(chart_type, d_labels$old)],
+                             if_else(chart_name>0, as.character(chart_name), ""))) %>% 
+  mutate(chart_name = if_else(grepl("aga", domnames_v), paste0("agg_", chart_name), chart_name)) %>% # now in new folder, dont need agg anymore
   ungroup()
 
 
@@ -244,16 +248,6 @@ plot.var.4dim <- function(var_tmp, dimension){
     # the alternative would be to pass it in as an argument? Note <<- is the superassignment operator
     chart_ext <<- chart_ext
     
-    # a function that adds a sheet to the workbook that is created
-    custom.add.sheet <- function(d,  s_name){ # tmp_wb = wb,
-      tmp_wb <<- wb
-      openxlsx::addWorksheet(tmp_wb,
-                             sheetName = s_name)
-      openxlsx::writeData(tmp_wb,
-                          sheet = s_name,
-                          d)
-    }
-    
     # use the selected theme
     gg_theme <- get(theme)
     
@@ -315,8 +309,10 @@ plot.var.4dim <- function(var_tmp, dimension){
              
              compute_shares <- d_chart$compute_shares[1]
              uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
+             uni_fill <- d_chart$sim_l %>% unique %>% length # used to check whether need to delete legend
              
-             ggplot(d_chart, aes(x=var3, y=change, fill=sim_l)) +
+             
+             ggplot(d_chart, aes(x=var3, y=change_per, fill=sim_l)) +
                geom_col(position = position_dodge()) +
                scale_y_continuous(n.breaks = 8) +
                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
@@ -324,7 +320,7 @@ plot.var.4dim <- function(var_tmp, dimension){
                     x = NULL,
                     y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
                     fill = NULL) +
-               gg_theme + rot.axis(uni_factors)
+               gg_theme + rot.axis(uni_factors) + delete.legend(uni_fill) 
              
              # save
              custom.save.f(my_theme = gg_theme,
@@ -357,8 +353,10 @@ plot.var.4dim <- function(var_tmp, dimension){
               
               compute_shares <- d_chart$compute_shares[1]
               uni_factors <- d_chart$lab %>% unique %>% length # this is probably not enough, if we have many simulations
+              uni_fill <- d_chart$var3 %>% unique %>% length # used to check whether need to delete legend
               
-              ggplot(d_chart, aes(x=lab, y=change, fill=var3)) +
+              
+              ggplot(d_chart, aes(x=lab, y=change_per, fill=var3)) +
                 geom_col(position = position_dodge()) +
                 scale_y_continuous(n.breaks = 8) +
                 labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
@@ -366,7 +364,7 @@ plot.var.4dim <- function(var_tmp, dimension){
                      x = NULL,
                      y = paste0("% change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
                      fill = NULL) +
-                gg_theme + rot.axis(uni_factors)
+                gg_theme + rot.axis(uni_factors) + delete.legend(uni_fill)
               
               # save
               custom.save.f(my_theme = gg_theme,
@@ -377,7 +375,95 @@ plot.var.4dim <- function(var_tmp, dimension){
               if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
             }
       )
-    }
+    } else if (chart_type=="sim_levdiff_oneyear_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulation: for a given year, show the changes wrt baseline, for each level
+      map2( d_tmp$r %>% unique,
+            d_tmp$var3f %>% unique,
+            
+            function(x,y){
+              # debug: x="IDN"
+              # debug: y="Old"
+              
+              if(length(year_span)>1)stop("For sim_%bau_oneyear_bar only one year can be used!")
+              
+              d_chart <- d_tmp %>%
+                filter(r == x,
+                       var3f == y,
+                       sim %in% simulations,
+                       sim != "BaU",
+                       t %in% year_span)
+              
+              compute_shares <- d_chart$compute_shares[1]
+              uni_factors <- d_chart$var3 %>% unique %>% length # this is probably not enough, if we have many simulations
+              uni_fill <- d_chart$sim_l %>% unique %>% length # used to check whether need to delete legend
+              
+              
+              ggplot(d_chart, aes(x=var3, y=change_lev, fill=sim_l)) +
+                geom_col(position = position_dodge()) +
+                scale_y_continuous(n.breaks = 8) +
+                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
+                     subtitle = paste0(x, ", Simulations (", year_span, ")" ),
+                     x = NULL,
+                     y = paste0("change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
+                     fill = NULL) +
+                gg_theme + rot.axis(uni_factors) + delete.legend(uni_fill)
+              
+              # save
+              custom.save.f(my_theme = gg_theme,
+                            filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, "_", y, chart_ext) ),
+                            factors = uni_factors)
+              
+              # add data to the Excel file
+              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
+            }
+      )
+    } else if (chart_type=="sim_levdiff_allyears_bar"){
+      # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      # simulation: for a given year, show the changes wrt baseline, for each level
+      map2( d_tmp$r %>% unique,
+            d_tmp$var3f %>% unique,
+            
+            function(x,y){
+              # debug: x="IDN"
+              # debug: y="Old"
+              
+              d_chart <- d_tmp %>%
+                filter(r == x,
+                       var3f == y,
+                       sim != "BaU",
+                       sim %in% simulations,
+                       t %in% year_span)
+              
+              # we need to create new labels: yearXsim
+              d_chart %<>% mutate(lab = paste0(t, "\n", sim_l))
+              
+              compute_shares <- d_chart$compute_shares[1]
+              uni_factors <- d_chart$lab %>% unique %>% length # this is probably not enough, if we have many simulations
+              uni_fill <- d_chart$var3 %>% unique %>% length # used to check whether need to delete legend
+              
+              
+              ggplot(d_chart, aes(x=lab, y=change_lev, fill=var3)) +
+                geom_col(position = position_dodge()) +
+                scale_y_continuous(n.breaks = 8) +
+                labs(title = d_3dim %>% filter(variable_name==var_tmp) %>% pull(variable_label), # automatically takes first of vector
+                     subtitle = paste0(x, ", Simulations (", y, ")" ),
+                     x = NULL,
+                     y = paste0("change w.r.t. baseline", ifelse(compute_shares==T, " shares", "")),
+                     fill = NULL) +
+                gg_theme + rot.axis(uni_factors) + delete.legend(uni_fill)
+              
+              # save
+              custom.save.f(my_theme = gg_theme,
+                            filename = file.path(chart_dir, folder_name, var_tmp, paste0(x, "_", chart_name, "_", y, chart_ext) ),
+                            factors = uni_factors)
+              
+              # add data to the Excel file
+              if(export_chart_data==1){custom.add.sheet(d=d_chart, s_name=paste0(x, "_", chart_name, "_", y))}
+            }
+      )
+    }  
+    # add new chart here: else if (chart_type=="new chart name")
     
     #' Finally close and save the Excel file containing all the charts data for
     #' a given variable

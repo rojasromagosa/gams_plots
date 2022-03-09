@@ -57,7 +57,7 @@ my_theme3 <- list(
               
               #' Colors used for bar charts
               #scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black","orange","red")),
-              scale_fill_manual(values = brewer.pal(9, "Blues")[9:1]),
+              scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
               #scale_fill_brewer(palette="Set2"),
               
               #' Colors used in line charts: 
@@ -66,28 +66,162 @@ my_theme3 <- list(
 )
               
 
-my_themeNoTtl <-   theme(text=element_text(size=11), #default text size
-                   panel.border = element_blank(), # delete panel border
-                   panel.background = element_rect(fill = NA), # fill in background 
-                   panel.grid.major.y = element_line(colour = "grey90"), # color of grid
-                   axis.line = element_line(),  # add axis lines
-                   plot.title = element_blank(), #element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
-                   plot.subtitle = element_blank(), #element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
-                   axis.title.x = element_text(size = rel(1)),
-                   axis.title.y = element_text(size = rel(1)),
-                   axis.text.x = element_text(size = rel(1)),
-                   axis.text.y = element_text(size = rel(1), margin = margin(t=0, r=10, b=0, l=0)),
-                   legend.text = element_text(size = rel(1)),
-                   legend.title = element_text(size = rel(1.1))
-                  
+my_themeNoTtl <-   list(
+          theme(text=element_text(size=11), #default text size
+          panel.border = element_blank(), # delete panel border
+          panel.background = element_rect(fill = NA), # fill in background 
+          panel.grid.major = element_line(colour = "grey90"), # color of grid
+          axis.line = element_line(),  # add axis lines
+#          plot.title = element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+          plot.title = element_blank(),
+#          plot.subtitle = element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+          plot.subtitle =element_blank(),
+          axis.title.x = element_text(size = rel(1)),
+          axis.title.y = element_text(size = rel(1)),
+          axis.text.x = element_text(size = rel(1)),
+          axis.text.y = element_text(size = rel(1)),
+          legend.text = element_text(size = rel(1)),
+          #legend.title = element_text(size = rel(1.1)),
+          legend.title = element_blank(),
+          legend.position="right"),
+    
+    #' Colors used for bar charts
+    scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black","orange","red")),
+    #scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
+    #scale_fill_brewer(palette="Set2"),
+    
+    #' Colors used in line charts: 
+    #scale_color_manual(values = c("blue", "red", "yellow", "green"))
+    scale_color_brewer(palette="Set2")
 )
 
+
+themeNT2 <-   list(
+  theme(text=element_text(size=11), #default text size
+        panel.border = element_blank(), # delete panel border
+        panel.background = element_rect(fill = NA), # fill in background 
+        panel.grid.major = element_line(colour = "grey90"), # color of grid
+        axis.line = element_line(),  # add axis lines
+        #          plot.title = element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+        plot.title = element_blank(),
+        #          plot.subtitle = element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+        plot.subtitle =element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)),
+        legend.text = element_text(size = rel(1)),
+        #legend.title = element_text(size = rel(1.1)),
+        legend.title = element_blank(),
+        legend.position="right"),
+  
+  #' Colors used for bar charts
+  scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black","orange","red")),
+  #scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
+  #scale_fill_brewer(palette="Set2"),
+  
+  #' Colors used in line charts: 
+  #scale_color_manual(values = c("blue", "red", "yellow", "green"))
+  scale_color_brewer(palette="Set2")
+)
+
+themeNT3 <-   list(
+  theme(text=element_text(size=11), #default text size
+        panel.border = element_blank(), # delete panel border
+        panel.background = element_rect(fill = NA), # fill in background 
+        panel.grid.major = element_line(colour = "grey90"), # color of grid
+        axis.line = element_line(),  # add axis lines
+        #          plot.title = element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+        plot.title = element_blank(),
+        #          plot.subtitle = element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+        plot.subtitle =element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(), #element_text(size = rel(1.5)),
+        axis.text.x = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)),
+        legend.text = element_text(size = rel(1)),
+        #legend.title = element_text(size = rel(1.1)),
+        legend.title = element_blank(),
+        legend.position="right"),
+  
+  #' Colors used for bar charts
+  scale_fill_manual(values = c("lightskyblue1","cornflowerblue","mediumblue","navy","black","lightseagreen","royalblue","lightskyblue1","orange","red")),
+  #scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
+  #scale_fill_brewer(palette="Set2"),
+  
+  #' Colors used in line charts: 
+  #scale_color_manual(values = c("blue", "red", "yellow", "green"))
+  scale_color_brewer(palette="Set2")
+)
+
+themeNT4 <-   list(
+  theme(text=element_text(size=11), #default text size
+        panel.border = element_blank(), # delete panel border
+        panel.background = element_rect(fill = NA), # fill in background 
+        panel.grid.major = element_line(colour = "grey90"), # color of grid
+        axis.line = element_line(),  # add axis lines
+        #          plot.title = element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+        plot.title = element_blank(),
+        #          plot.subtitle = element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+        plot.subtitle =element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y =element_blank(),
+        axis.text.x = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)),
+        legend.text = element_blank(),
+        #legend.title = element_text(size = rel(1.1)),
+        legend.title = element_blank(),
+        legend.position="bottom"),
+#        legend.position=element_blank(),
+  #' Colors used for bar charts
+  scale_fill_manual(values = c("cornflowerblue","royalblue","mediumblue","navy","black","orange","red")),
+  #scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
+  #scale_fill_brewer(palette="Set2"),
+  
+  #' Colors used in line charts: 
+  scale_color_manual(values = c("black","blue","green","red","yellow","green"))
+  #scale_color_brewer(palette="Set2")
+)
+
+
+themeNT5 <-   list(
+  theme(text=element_text(size=11), #default text size
+        panel.border = element_blank(), # delete panel border
+        panel.background = element_rect(fill = NA), # fill in background 
+        panel.grid.major = element_line(colour = "grey90"), # color of grid
+        axis.line = element_line(),  # add axis lines
+        #          plot.title = element_text(hjust = 0.5, size = rel(1.2)), #, size = 14, face = "bold"),
+        plot.title = element_blank(),
+        #          plot.subtitle = element_text(hjust = 0.5, size = rel(1.1)), #, size = 12, face = "bold"),
+        plot.subtitle =element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(), #element_text(size = rel(1.5)),
+        axis.text.x = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)),
+        legend.text = element_text(size = rel(0.85)),
+        #legend.title = element_text(size = rel(1.1)),
+        legend.title = element_blank(),
+        legend.position="right"),
+  
+  #' Colors used for bar charts
+  scale_fill_manual(values = c("lightsteelblue1","lightskyblue1","cornflowerblue","royalblue","mediumblue","navy","black","lightseagreen","orange","red")),
+  #scale_fill_manual(values = brewer.pal(9, "Blues")[1:9]),
+  #scale_fill_brewer(palette="Set2"),
+  
+  #' Colors used in line charts: 
+  #scale_color_manual(values = c("blue", "red", "yellow", "green"))
+  scale_color_brewer(palette="Set2")
+)
 
 
 #' we can make the rotation of the axis ticks conditional on the number of levels. Here we define uni_factor
 #' This function is exectuted at the end of each chart to check whether to rotate the x axis labels 
 # xaxis <- theme(axis.title.y=element_text(size= 12,angle=90), margin = margin(t=0, r=10, b=0, l=0))
 rot.axis <- function(uni_factors){ if(uni_factors>7){theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=0.9))}}
+
+#' delete legend if have only one factor
+delete.legend <- function(uni_fill){ if(uni_fill==1){theme(legend.position="none")}}
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
