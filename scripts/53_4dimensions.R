@@ -58,21 +58,23 @@ d_4dim <- bind_rows(
   d_4dim %>%
     filter( aggregate == 1 ) %>%
     mutate(domnames_v = gsub("^a|a$|(?<=-)a(?=-)", "aga", domnames_v, perl = T))  %>%  # substitute a with aga, keeping track of different possible positions of a
-    mutate( aggr = "_aggr")
+    mutate( aggr = "aggr_")
 )
 
 
 #' Chart names
-#' For a given variable, if we have the same plot with different years or styles, we need to create different names
 d_4dim %<>%
-  group_by(variable_name, chart_type) %>%
-  mutate(chart_name = row_number() -1) %>% 
-  mutate(chart_name = paste0(variable_name,
+  mutate(chart_name = paste0(aggr,
+                             variable_name,
                              "_",
-                             #gsub("\\%", "", chart_type),
-                             d_labels$new[match(chart_type, d_labels$old)],
-                             if_else(chart_name>0, as.character(chart_name), ""))) %>% 
-  mutate(chart_name = if_else(grepl("aga", domnames_v), paste0("agg_", chart_name), chart_name)) %>% # now in new folder, dont need agg anymore
+                             d_labels$new[match(chart_type, d_labels$old)])) %>% 
+  rowwise() %>% 
+  mutate(chart_name = if_else(grepl("_oneyear_bar$", chart_type), gsub("1yb$", year_span[[1]], chart_name), chart_name)) %>%  # sub in the year if oneyear_chart
+  #' in case chart names are not unique:
+  group_by(chart_name) %>%
+  mutate(index = row_number()) %>% 
+  mutate(chart_name = if_else(index>1, paste0(chart_name, index-1), chart_name)) %>% 
+  select(-index) %>% 
   ungroup()
 
 
@@ -268,6 +270,8 @@ plot.var.4dim <- function(var_tmp, dimension){
              
              compute_shares <- d_chart$compute_shares[1]
              uni_factors <- d_chart$var3 %>% unique %>% length
+             uni_fill <- d_chart$t %>% unique %>% length # used to check whether need to delete legend
+             
              
              ggplot(d_chart, aes(x=var3, y=value, fill=factor(t))) +
                geom_col(position = position_dodge()) +
@@ -277,7 +281,7 @@ plot.var.4dim <- function(var_tmp, dimension){
                     x = NULL,
                     y = ifelse(compute_shares==T, "% of total", "Baseline value" ), 
                     fill = NULL) +
-               gg_theme  + rot.axis(uni_factors)
+               gg_theme  + rot.axis(uni_factors) + delete.legend(uni_fill)
 
              # save
              custom.save.f(my_theme = gg_theme,
